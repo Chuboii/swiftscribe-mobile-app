@@ -8,8 +8,8 @@ import { useFonts } from 'expo-font'
 import Theme from './utils/theme/theme/theme';
 import theme from './utils/theme/theme/theme';
 
+
 export default function App() {
-   
   const [fontsLoaded, fontError] = useFonts({
     "kanit-bold": require("./assets/font/kanit/Kanit-Bold.ttf"),
     "kanit-regular": require("./assets/font/kanit/Kanit-Regular.ttf"),

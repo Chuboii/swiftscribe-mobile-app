@@ -6,6 +6,11 @@ import SignUpScreen from '../../screens/auth/sign up screen/SignUpScreen'
 import TabNavigation from '../tab navigation/TabNavigation'
 import AccountRecoveryScreen from '../../screens/auth/account recovery screen/AccountRecoveryScreen'
 import theme from '../../utils/theme/theme/theme'
+import EmailSignInScreen from '../../screens/auth/email sign in screen/EmailSignInScreen'
+import EmailVerificationScreen from '../../screens/auth/email verification screen/EmailVerificationScreen'
+import CreatePasswordScreen from '../../screens/auth/create password screen/CreatePasswordScreen'
+import CreateNameScreen from '../../screens/auth/create name screen/CreateNameScreen'
+import UploadAvatarScreen from '../../screens/auth/upload avatar screen/UploadAvatarScreen'
 
 
 const Stack = createNativeStackNavigator()
@@ -14,7 +19,7 @@ const uiTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: "red"
+        background: theme().background
     }
 }
 
@@ -22,10 +27,18 @@ const StackNavigtion = () => {
 
   return (
       <NavigationContainer theme={uiTheme}>
-          <Stack.Navigator screenOptions={{headerShown:false}}>
+          <Stack.Navigator screenOptions={{
+              headerShown: false,
+              animation:"none"
+          }}>
               <Stack.Screen name="sign up" component={SignUpScreen} />
               <Stack.Screen name="account recovery" component={AccountRecoveryScreen} />
-              {/* <Stack.Screen name="tab" component={TabNavigation}/> */}
+              <Stack.Screen name="email signin" component={EmailSignInScreen} />
+              <Stack.Screen name="email verification" component={EmailVerificationScreen} />
+              <Stack.Screen name="create password" component={CreatePasswordScreen} />
+              <Stack.Screen name="create name" component={CreateNameScreen} />
+              <Stack.Screen name="upload avatar" component={UploadAvatarScreen} />
+              <Stack.Screen name="tab" component={TabNavigation}/>
           </Stack.Navigator>
       </NavigationContainer>
   )

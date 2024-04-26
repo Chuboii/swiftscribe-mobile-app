@@ -23,12 +23,12 @@ export const styles = StyleSheet.create({
         height:100
     },
     logoTxt: {
-        fontSize: 33,
-        color:theme().text,
+        fontSize: 30,
+        color: theme().text,
         fontFamily: 'climate-regular'
     },
     box: {
-     padding:15
+        padding: 15,
     },
     btnText: {
         fontFamily: "kanit-medium",
@@ -45,7 +45,8 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         justifyContent: "center",
-        marginTop:100
+        marginTop: 100,
+        paddingRight:30
     },
     btnWrapper: {
       marginTop:30  

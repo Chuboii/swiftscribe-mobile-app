@@ -2,9 +2,11 @@
 export const color = {
     background: "black",
     text: "white",
-    primary:"orangered",
-    white: "#fff",
+    primary: "orangered",
+    secondary: "#3557b7",
+    white:"#F5FCFF",
     black: "black",
-    border: "#eee",
-    btnText:"white"
+    border:"#F5FCFF",
+    btnText: "white",
+    gray:"#E3E3E3"
 }

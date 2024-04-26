@@ -2,7 +2,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Button from '../../../components/button/Button'
 import { styles } from './SignUpScreen.style'
-import {  signupWithFacebook, signupWithGoogle, signupWithPhone } from '../../../utils/auth/signUp'
+import { signupWithFacebook, signupWithGoogle, signupWithPhone} from '../../../utils/auth/signUp'
+import { navigateToEmailPage, navigateToAccountRecovery } from '../../../utils/navigations/navigations'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import theme from '../../../utils/theme/theme/theme'
 
@@ -11,10 +12,10 @@ const SignUpScreen = ({ navigation }) => {
 
 
     
- const navigateToAccountRecovery = () => {
-    navigation.navigate("account recovery")
-    }
+ const navigateToAcctRecovery = () => navigateToAccountRecovery(navigation)
     
+  const navigateToEmail = () => navigateToEmailPage(navigation)
+
   return (
       <SafeAreaView style={styles.container}>
           <View style={styles.wrap}>
@@ -28,9 +29,9 @@ const SignUpScreen = ({ navigation }) => {
         <View style={styles.btnWrapper}>
           <Button helperFunction={signupWithGoogle} icon={require("../../../assets/googleIcon.png")} text={"Sign in with Google"} imgStyle={styles.imgStyles} textStyle={styles.btnText} containerStyle={styles.btnStyles}/>
           <Button helperFunction={signupWithFacebook} icon={require("../../../assets/facebookIcon.png")} text={"Sign in with Facebook"}  imgStyle={styles.imgStyles} textStyle={styles.btnText} containerStyle={styles.btnStyles}/>
-          <Button helperFunction={signupWithPhone} icon={require("../../../assets/phoneIcon.png")} text={"Sign in with Google"} imgStyle={styles.imgStyles} textStyle={styles.btnText} containerStyle={styles.btnStyles} />
+          <Button helperFunction={navigateToEmail} icon={require("../../../assets/images/emailIcon.png")} text={"Sign in with Email"} imgStyle={styles.imgStyles} textStyle={styles.btnText} containerStyle={styles.btnStyles} />
               </View>
-              <Button text={"Trouble signin in?"} icon={null} textStyle={[styles.text, {textAlign:"center", marginVertical:20}]} imgStyle={null} containerStyle={null} helperFunction={navigateToAccountRecovery}/>
+              <Button text={"Trouble signin in?"} textStyle={[styles.text, {textAlign:"center", color:theme().primary, marginVertical:20}]}  helperFunction={navigateToAcctRecovery}/>
           </View>
           
     </SafeAreaView>
