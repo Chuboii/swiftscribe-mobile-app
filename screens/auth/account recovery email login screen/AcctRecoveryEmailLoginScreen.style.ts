@@ -34,6 +34,14 @@ export const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal:15
     },
+    title: {
+        paddingTop: 50,
+        fontSize: 25,
+        color: theme().text,
+        textAlign: 'center',
+        paddingBottom: 40,
+        fontFamily:"kanit-bold"
+    },
     wrap: {
       marginTop:20  
     },

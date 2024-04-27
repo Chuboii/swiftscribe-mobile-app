@@ -18,7 +18,7 @@ export const navigateToEmailVerificationPage = (navigation) => {
 }
 
 export const navigateToCreatePasswordPage = (navigation) => {
-  navigation.navigate("create password")
+  navigation.navigate("login password")
 }
 
 export const navigateToCreateNamePage = (navigation) => {
@@ -27,4 +27,8 @@ export const navigateToCreateNamePage = (navigation) => {
 
 export const navigateToUploadAvatarPage = (navigation) => {
     navigation.navigate("upload avatar")
-  }
+}
+  
+export const navigateToAcctRecoveryEmailLoginPage = (navigation) => {
+  navigation.navigate("acct recovery email login")
+}

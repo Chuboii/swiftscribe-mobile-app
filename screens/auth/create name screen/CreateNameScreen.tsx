@@ -6,6 +6,7 @@ import Button from '../../../components/button/Button';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import theme from '../../../utils/theme/theme/theme';
 import { navigateToSignupPage, navigateToUploadAvatarPage } from '../../../utils/navigations/navigations';
+import Input from '../../../components/input/Input';
 
 const CreateNameScreen = ({navigation}) => {
 
@@ -21,10 +22,10 @@ const CreateNameScreen = ({navigation}) => {
           </TouchableOpacity>
           <Text style={styles.title}>What's your name?</Text>
           <View>
-                  <TextInput
+                  <Input
                       style={styles.textInput}
                       placeholder='Tell us your name'
-                      placeholderTextColor={theme().text}
+                      placeholderColor={theme().text}
               />
           </View>
           <Text style={styles.text1}>This is how it'll appear on your profile</Text>

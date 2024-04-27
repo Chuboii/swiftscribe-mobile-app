@@ -11,6 +11,8 @@ import EmailVerificationScreen from '../../screens/auth/email verification scree
 import CreatePasswordScreen from '../../screens/auth/create password screen/CreatePasswordScreen'
 import CreateNameScreen from '../../screens/auth/create name screen/CreateNameScreen'
 import UploadAvatarScreen from '../../screens/auth/upload avatar screen/UploadAvatarScreen'
+import LoginPasswordScreen from '../../screens/auth/login password screen/LoginPasswordScreen'
+import AcctRecoveryEmailLoginScreen from '../../screens/auth/account recovery email login screen/AcctRecoveryEmailLoginScreen'
 
 
 const Stack = createNativeStackNavigator()
@@ -38,6 +40,8 @@ const StackNavigtion = () => {
               <Stack.Screen name="create password" component={CreatePasswordScreen} />
               <Stack.Screen name="create name" component={CreateNameScreen} />
               <Stack.Screen name="upload avatar" component={UploadAvatarScreen} />
+              <Stack.Screen name="login password" component={LoginPasswordScreen} />
+              <Stack.Screen name="acct recovery email login" component={AcctRecoveryEmailLoginScreen} />
               <Stack.Screen name="tab" component={TabNavigation}/>
           </Stack.Navigator>
       </NavigationContainer>

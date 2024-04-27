@@ -24,12 +24,14 @@ export const styles = StyleSheet.create({
         textAlign: "center",
         marginBottom: 30,
         fontSize: 17,
-        color:theme().text
+        color: theme().text,
+        fontFamily:"kanit-medium"
     },
     btnText: {
         color: theme().btnText,
         textAlign: "center",
-        fontSize:17
+        fontSize: 17,
+        fontFamily:"kanit-medium"
     },
     btnStyle: {
         backgroundColor: theme().primary,

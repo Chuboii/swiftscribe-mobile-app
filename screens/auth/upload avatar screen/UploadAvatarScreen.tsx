@@ -35,8 +35,10 @@ const UploadAvatarScreen = () => {
 
                 <TouchableOpacity style={styles.box} onPress={pickImageFromLibrary}>
                 
-                    <AntDesign style={styles.plus} name="pluscircle" size={24} color="black" />
-                    <Image style={styles.image} source={require("../../../assets/googleIcon.png")}/>
+            <AntDesign style={styles.plus} name="pluscircle" size={24} color="black" />
+            <View style={styles.imageBox}>
+              <Image style={styles.image} source={require("../../../assets/images (14).jpeg")} />
+            </View>
                 </TouchableOpacity>  
                 
             

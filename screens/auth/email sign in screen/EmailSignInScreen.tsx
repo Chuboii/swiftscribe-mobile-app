@@ -5,6 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { styles } from './EmailSignInScreen.style';
 import Button from '../../../components/button/Button';
 import { navigateToEmailVerificationPage, navigateToSignupPage } from '../../../utils/navigations/navigations';
+import Input from '../../../components/input/Input';
 
 const EmailSignInScreen = ({navigation}) => {
 
@@ -21,10 +22,10 @@ const EmailSignInScreen = ({navigation}) => {
           <View style={styles.wrapper}>
           <View style={styles.inputBox}>
           <AntDesign style={styles.emailIcon} name="mail" size={24} color="black" />
-              <TextInput
+              <Input
               style={styles.input}
               placeholder='Email Address'
-                
+              autoCapitalize={"none"}
               />
               </View>
               

@@ -7,6 +7,7 @@ import { styles } from './CreatePassswordScreen.style';
 import { Entypo } from '@expo/vector-icons';
 import { navigateToCreateNamePage, navigateToSignupPage } from '../../../utils/navigations/navigations';
 import theme from '../../../utils/theme/theme/theme';
+import Input from '../../../components/input/Input';
 
 const CreatePasswordScreen = ({ navigation }) => {
     
@@ -22,8 +23,8 @@ const CreatePasswordScreen = ({ navigation }) => {
           </TouchableOpacity>
           
           <View style={styles.inputBox}>
-              <TextInput
-                  placeholderTextColor={theme().text}
+              <Input
+                  placeholderColor={theme().text}
                   style={styles.input}
                   placeholder='create password'
               />
@@ -33,8 +34,8 @@ const CreatePasswordScreen = ({ navigation }) => {
           </View>
 
           <View style={styles.inputBox}>
-              <TextInput
-                   placeholderTextColor={theme().text}
+              <Input
+                   placeholderColor={theme().text}
                   style={styles.input}
                placeholder='confirm password'
               />

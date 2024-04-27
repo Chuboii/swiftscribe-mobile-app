@@ -4,11 +4,13 @@ import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../../../components/button/Button';
 import { styles } from './AccountRecoveryScreen..style';
-import { navigateToSignupPage } from '../../../utils/navigations/navigations';
+import { navigateToAcctRecoveryEmailLoginPage, navigateToSignupPage } from '../../../utils/navigations/navigations';
 
 const AccountRecoveryScreen = ({navigation}) => {
 
   const navigate = () => navigateToSignupPage(navigation)
+  
+  const navigateToAcctRecoveryEmailLogin = () => navigateToAcctRecoveryEmailLoginPage(navigation)
   
   return (
       <SafeAreaView style={styles.container}>
@@ -20,7 +22,7 @@ const AccountRecoveryScreen = ({navigation}) => {
           <View style={styles.wrapper}>
               <Text style={styles.title}>Account Recovery</Text>
               <Text style={styles.text}>Changed your phone number, or lost access to your Facebook Account? We can help you login with your email</Text>
-             <Button text={"Login with email"} textStyle={styles.btnText} containerStyle={styles.btnStyle}/>
+             <Button helperFunction={navigateToAcctRecoveryEmailLogin} text={"Login with email"} textStyle={styles.btnText} containerStyle={styles.btnStyle}/>
           </View>
     </SafeAreaView>
   )
