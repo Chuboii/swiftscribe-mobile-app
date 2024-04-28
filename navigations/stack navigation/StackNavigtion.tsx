@@ -3,7 +3,6 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import SignUpScreen from '../../screens/auth/sign up screen/SignUpScreen'
-import TabNavigation from '../tab navigation/tabNavigation'
 import AccountRecoveryScreen from '../../screens/auth/account recovery screen/AccountRecoveryScreen'
 import theme from '../../utils/theme/theme/theme'
 import EmailSignInScreen from '../../screens/auth/email sign in screen/EmailSignInScreen'
@@ -13,8 +12,8 @@ import CreateNameScreen from '../../screens/auth/create name screen/CreateNameSc
 import UploadAvatarScreen from '../../screens/auth/upload avatar screen/UploadAvatarScreen'
 import LoginPasswordScreen from '../../screens/auth/login password screen/LoginPasswordScreen'
 import AcctRecoveryEmailLoginScreen from '../../screens/auth/account recovery email login screen/AcctRecoveryEmailLoginScreen'
-import TapNavigation from '../top navigation/HomeTopNavigation'
-
+import HomeTabNavigation from '../top navigation/HomeTopNavigation'
+import TabNavigation from '../tab navigation/TabNavigation'
 
 const Stack = createNativeStackNavigator()
 
@@ -46,7 +45,7 @@ const StackNavigtion = () => {
               <Stack.Screen name="login password" component={LoginPasswordScreen} />
               <Stack.Screen name="acct recovery email login" component={AcctRecoveryEmailLoginScreen} />
               <Stack.Screen name="tab" component={TabNavigation} />
-              <Stack.Screen name="tap" component={TapNavigation}/>
+             <Stack.Screen name="tap" component={HomeTabNavigation}/>
           </Stack.Navigator>
       </NavigationContainer>
   )
