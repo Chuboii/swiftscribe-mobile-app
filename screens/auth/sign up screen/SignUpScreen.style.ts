@@ -54,6 +54,6 @@ export const styles = StyleSheet.create({
     text: {
         fontSize: 17,
         color:theme().text,
-        fontFamily:"kanit-medium"
+        fontFamily:"kanit-regular"
     }
 })

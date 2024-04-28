@@ -1,14 +1,22 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import SignUpScreen from '../../screens/auth/sign up screen/SignUpScreen'
+import BookmarkScreen from '../../screens/bookmark screen/BookmarkScreen'
+import SearchScreen from '../../screens/search screen/SearchScreen'
+import ProfileScreen from '../../screens/profile screen/ProfileScreen'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import HomeTabNavigation from '../top navigation/HomeTopNavigation';
 
-const Tab = createBottomTabNavigator()
+const Tab = createMaterialBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-      <Tab.Navigator>
-          <Tab.Screen name='home' component={SignUpScreen}/>
+    <Tab.Navigator
+      initialRouteName="home"
+      activeColor="#f0edf6"
+      inactiveColor="#3e2465"
+      barStyle={{ backgroundColor: 'white' }}>
+      <Tab.Screen  options={{ tabBarLabel: 'Home' }} name='home' component={HomeTabNavigation} />
+      <Tab.Screen name='search' component={SearchScreen} />
+      <Tab.Screen name='bookmark' component={BookmarkScreen} />
+      <Tab.Screen name='profile' component={ProfileScreen}/>
     </Tab.Navigator>
   )
 }
