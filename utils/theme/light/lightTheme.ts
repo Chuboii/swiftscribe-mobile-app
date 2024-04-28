@@ -8,5 +8,6 @@ export const color = {
     border: "black",
     text: "black",
     btnText: "#F5FCFF",
-    gray:"#E3E3E3"
+    gray: "#E3E3E3",
+    gray2:"gray"
 }

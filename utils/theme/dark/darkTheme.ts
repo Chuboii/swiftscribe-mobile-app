@@ -1,6 +1,6 @@
 
 export const color = {
-    background: "black",
+    background: "#0C0C0C",
     text: "white",
     primary: "orangered",
     secondary: "#3557b7",
@@ -8,5 +8,6 @@ export const color = {
     black: "black",
     border:"#F5FCFF",
     btnText: "white",
-    gray:"#E3E3E3"
+    gray: "#E3E3E3",
+    gray2: "gray"
 }

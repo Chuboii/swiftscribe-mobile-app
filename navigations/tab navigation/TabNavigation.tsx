@@ -6,6 +6,7 @@ import HomeTabNavigation from '../top navigation/HomeTopNavigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import theme from '../../utils/theme/theme/theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +15,7 @@ const TabNavigation = () => {
     <Tab.Navigator
     screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+            let iconName: any;
 
             if (route.name === 'home') {
               iconName = focused
@@ -36,8 +37,9 @@ const TabNavigation = () => {
             return <Ionicons name={iconName} size={24} color={color} />
           },
           headerShown:false,
-          tabBarActiveTintColor: 'black',
-          tabBarInactiveTintColor: 'gray',
+          tabBarActiveTintColor: theme().text,
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {backgroundColor:theme().background}
         })}
       
   >

@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native"
+import theme from "../../utils/theme/theme/theme"
 
 export const styles = StyleSheet.create({
   container:{
@@ -10,15 +11,16 @@ export const styles = StyleSheet.create({
   },
   text:{
     fontFamily:"kanit-bold",
-    fontSize:30,
+    fontSize: 30,
+    color: theme().text
   },
   btn:{
     
   },
   icon:{
-    
+    color: theme().text
   },
   btnText:{
-    
+    color:theme().btnText
   }
 })
