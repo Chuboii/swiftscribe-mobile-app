@@ -32,3 +32,11 @@ export const navigateToUploadAvatarPage = (navigation) => {
 export const navigateToAcctRecoveryEmailLoginPage = (navigation) => {
   navigation.navigate("acct recovery email login")
 }
+
+export const navigateToNotificationPage = (navigation) => {
+  navigation.navigate("notification")
+}
+
+export const navigateBack = (navigation) => {
+  navigation.goBack()
+}

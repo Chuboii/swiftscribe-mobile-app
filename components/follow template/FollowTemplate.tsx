@@ -11,11 +11,11 @@ const FollowTemplate = ({containerStyle = null, btnStyle = null, btnTextStyle = 
               
               <View style={[styles.wrap, wrapStyle]}>
                   <Text style={[styles.name, nameStyle]}>{username}</Text>
-                  <Text style={[styles.bio, bioStyle]} numberOfLines={3}>{bio}</Text>
+                  <Text style={[styles.bio, bioStyle]} numberOfLines={2}>{bio}</Text>
               </View>
           </View>
 
-          <Button text={"follow"} containerStyle={[styles.btn, btnStyle]} textStyle={[styles.btnText, btnTextStyle]}/>
+          <Button text={"following"} containerStyle={[styles.btn, btnStyle]} textStyle={[styles.btnText, btnTextStyle]}/>
           
     </View>
   )

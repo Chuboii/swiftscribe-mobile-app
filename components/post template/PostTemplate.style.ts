@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent:"space-between",
         marginTop: 10,
-        alignItems:"center"
+    
     },
     name: {
         fontFamily: "kanit-regular",
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
         color: theme().text
     },
     btn: {
-      marginLeft:35
+      marginLeft:30
     },
     profileImg: {
         width: 30,
@@ -44,11 +44,11 @@ export const styles = StyleSheet.create({
         alignItems:"center"
     },
     icon: {
-      color: theme().gray
+      color: theme().text
     },
     title: {
         fontFamily: "kanit-bold",
-        fontSize: 20,
+        fontSize: 18,
         width: (screenWidth - 160),
         color: theme().text
     },

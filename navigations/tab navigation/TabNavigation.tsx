@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import theme from '../../utils/theme/theme/theme';
+import HomeScreen from '../../screens/home screen/HomeScreen'
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +44,8 @@ const TabNavigation = () => {
         })}
       
   >
-      <Tab.Screen  options={{ tabBarLabel: '' }} name='home' component={HomeTabNavigation} />
+      <Tab.Screen  options={{ tabBarLabel: '' }} name='home'
+      component={HomeTabNavigation} />
       <Tab.Screen options={{ tabBarLabel: '' }} name='search' component={SearchScreen} />
       <Tab.Screen options={{ tabBarLabel: '' }} name='bookmark' component={BookmarkScreen} />
       <Tab.Screen options={{ tabBarLabel: '' }} name='profile' component={ProfileScreen}/>

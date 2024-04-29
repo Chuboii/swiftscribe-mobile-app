@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView} from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
@@ -47,7 +47,9 @@ const StackNavigtion = () => {
               <Stack.Screen name="login password" component={LoginPasswordScreen} />
               <Stack.Screen name="acct recovery email login" component={AcctRecoveryEmailLoginScreen} />
               <Stack.Screen name="tab" component={TabNavigation} />
-              <Stack.Screen name="tap" component={HomeTopNavigation} />
+           {/*
+              <Stack.Screen name="tap" component={HomeTopNavigation} />*/}
+            
               <Stack.Screen name="notification" component={NotificationScreen}/>
           </Stack.Navigator>
       </NavigationContainer>

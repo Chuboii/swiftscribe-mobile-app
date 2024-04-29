@@ -16,21 +16,28 @@ const PostTemplate = ({handleFunction = () => null, hide=true, style=null, nameS
           </View>
         
               <View style={[styles.wrapper, wrapperStyle]}>
-                  <Text style={[styles.title, titleStyle]}  numberOfLines={2}>{title}</Text>
+                  <Text style={[styles.title, titleStyle]}  numberOfLines={3}>{title}</Text>
                   <Image style={[styles.postImg, postImgStyle]} source={postPictureUrl} />
         
               </View>
               
           
           <View style={[styles.box, boxStyle]}>
-              <View style={[styles.wrap, wrapStyle]}>
+              <View style={[styles.wrap, wrapStyle, {
+              alignSelf:"flex-end"}]}>
                       <Text style={[styles.text]}>{date}</Text>
                   <Text style={[styles.text]}>{readTime}</Text>
               </View>
               <View style={[styles.wrap, wrapStyle]}>
-                  <Button containerStyle={styles.btn} expoIcon={<MaterialIcons name="post-add" size={24} style={styles.icon} color={theme().text} />}/>
-                  {hide && <Button containerStyle={styles.btn} expoIcon={<AntDesign name="minuscircleo" style={styles.icon}    size={24} color={theme().text} />} />}
-                  <Button containerStyle={styles.btn} expoIcon={<FontAwesome6 name="ellipsis-vertical" style={styles.icon} size={24} color={theme().text} />}/>
+                  <Button containerStyle={styles.btn} expoIcon={<MaterialIcons
+                  name="post-add" size={20} style={styles.icon}
+                  color={theme().text} />}/>
+                  {hide && <Button containerStyle={styles.btn}
+                  expoIcon={<AntDesign name="minuscircleo" style={styles.icon}
+                  size={20} color={theme().text} />} />}
+                  <Button containerStyle={styles.btn} expoIcon={<FontAwesome6
+                  name="ellipsis-vertical" style={styles.icon} size={20}
+                  color={theme().text} />}/>
               </View>
          </View>
        

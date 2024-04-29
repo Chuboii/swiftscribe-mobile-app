@@ -18,14 +18,19 @@ export const styles = StyleSheet.create({
         marginLeft:15 
     },
     btn: {
-        width: 100,
+      //width: 70,
+        paddingHorizontal:15,
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "flex-start",
-        paddingVertical: 8,
+        paddingVertical: 7,
         marginTop:5,
         borderRadius:30,
-        backgroundColor: theme().primary
+        right:5,
+        backgroundColor: theme().primary,
+        borderColor:theme().primary,
+        borderWidth:1,
+        backgroundColor: theme().background
     },
     btnText: {
         color: theme().text,
@@ -36,7 +41,7 @@ export const styles = StyleSheet.create({
         fontFamily: "kanit-medium",
         textTransform:"capitalize",
         color: theme().text,
-        fontSize:17
+        fontSize:18
     },
     bio: {
         fontFamily: "kanit-regular",
@@ -44,8 +49,8 @@ export const styles = StyleSheet.create({
         width: (screenWidth - 160),
     },
     profileImg: {
-        width: 35,
-        height: 35,
+        width: 40,
+        height: 40,
         borderRadius:50
     }
 })

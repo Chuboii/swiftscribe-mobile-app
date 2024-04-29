@@ -4,7 +4,7 @@ import { color as lightTheme} from "../light/lightTheme";
 
 const theme = () => {
 
-    if (false) {
+    if (true) {
         return lightTheme
     }
     else {
