@@ -27,7 +27,6 @@ export const styles = StyleSheet.create({
         marginTop:5,
         borderRadius:30,
         right:5,
-        backgroundColor: theme().primary,
         borderColor:theme().primary,
         borderWidth:1,
         backgroundColor: theme().background

@@ -30,7 +30,7 @@ export default function HomeTabNavigation({navigation}) {
  
   return (
     <>
-   <PageHeader handleFunction={navigateToNotification} text="Explore" button={<Ionicons name="notifications-outline"
+      <PageHeader handleFunction={navigateToNotification} text="Home" button={<Ionicons name="notifications-outline"
    size={24} style={styles.icon} color="black" />} containerStyle={styles.container}
    textStyle={styles.text} btnStyle={styles.btn}/>
 

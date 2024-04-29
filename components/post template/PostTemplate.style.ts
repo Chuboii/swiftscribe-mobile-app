@@ -5,7 +5,6 @@ const screenWidth = Dimensions.get("window").width
 
 export const styles = StyleSheet.create({
     container: {
-        padding: 10,
         borderBottomColor: theme().gray,
         borderBottomWidth: .5,
         paddingVertical: 25,

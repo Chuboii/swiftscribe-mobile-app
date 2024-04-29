@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import theme from '../../utils/theme/theme/theme';
 
-const PostTemplate = ({handleFunction = () => null, hide=true, style=null, nameStyle= null, boxStyle = null, containerStyle = null, wrapStyle = null, profileImgStyle = null,textStyle = null, wrapperStyle = null, titleStyle = null, postImgStyle = null , profilePictureUrl = null, expoIcon = null, username = null, title=null, postPictureUrl = null, date = null, readTime = null}) => {
+const PostTemplate = ({ handleFunction = () => null, hide=true, dontHideAllBtn = true, style=null, nameStyle= null, boxStyle = null, containerStyle = null, wrapStyle = null, profileImgStyle = null,textStyle = null, wrapperStyle = null, titleStyle = null, postImgStyle = null , profilePictureUrl = null, expoIcon = null, username = null, title=null, postPictureUrl = null, date = null, readTime = null}) => {
   return (
     <TouchableOpacity style={[styles.container, containerStyle]}>
         <View style={[styles.wrap, wrapStyle]}>
@@ -28,17 +28,18 @@ const PostTemplate = ({handleFunction = () => null, hide=true, style=null, nameS
                       <Text style={[styles.text]}>{date}</Text>
                   <Text style={[styles.text]}>{readTime}</Text>
               </View>
-              <View style={[styles.wrap, wrapStyle]}>
-                  <Button containerStyle={styles.btn} expoIcon={<MaterialIcons
-                  name="post-add" size={20} style={styles.icon}
-                  color={theme().text} />}/>
-                  {hide && <Button containerStyle={styles.btn}
-                  expoIcon={<AntDesign name="minuscircleo" style={styles.icon}
-                  size={20} color={theme().text} />} />}
-                  <Button containerStyle={styles.btn} expoIcon={<FontAwesome6
-                  name="ellipsis-vertical" style={styles.icon} size={20}
-                  color={theme().text} />}/>
-              </View>
+              {dontHideAllBtn &&
+                  <View style={[styles.wrap, wrapStyle]}>
+                      <Button containerStyle={styles.btn} expoIcon={<MaterialIcons
+                          name="post-add" size={20} style={styles.icon}
+                          color={theme().text} />} />
+                      {hide && <Button containerStyle={styles.btn}
+                          expoIcon={<AntDesign name="minuscircleo" style={styles.icon}
+                              size={20} color={theme().text} />} />}
+                      <Button containerStyle={styles.btn} expoIcon={<FontAwesome6
+                          name="ellipsis-vertical" style={styles.icon} size={20}
+                          color={theme().text} />} />
+                  </View>}
          </View>
        
     </TouchableOpacity>

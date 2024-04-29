@@ -37,6 +37,11 @@ export const navigateToNotificationPage = (navigation) => {
   navigation.navigate("notification")
 }
 
+export const navigateToSearchPage = (navigation) => {
+  navigation.navigate("search")
+}
+
+
 export const navigateBack = (navigation) => {
   navigation.goBack()
 }

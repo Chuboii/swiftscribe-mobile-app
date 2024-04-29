@@ -8,6 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import theme from '../../utils/theme/theme/theme';
 import HomeScreen from '../../screens/home screen/HomeScreen'
+import ExploreScreen from '../../screens/explore screen/ExploreScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ const TabNavigation = () => {
               iconName = focused
                 ? 'home'
                 : 'home-outline';
-            } else if (route.name === 'search') {
+            } else if (route.name === 'explore') {
               iconName = focused ? 'search' : 'search-outline';
             }else if (route.name === 'bookmark') {
 
@@ -46,7 +47,7 @@ const TabNavigation = () => {
   >
       <Tab.Screen  options={{ tabBarLabel: '' }} name='home'
       component={HomeTabNavigation} />
-      <Tab.Screen options={{ tabBarLabel: '' }} name='search' component={SearchScreen} />
+      <Tab.Screen options={{ tabBarLabel: '' }} name='explore' component={ExploreScreen} />
       <Tab.Screen options={{ tabBarLabel: '' }} name='bookmark' component={BookmarkScreen} />
       <Tab.Screen options={{ tabBarLabel: '' }} name='profile' component={ProfileScreen}/>
     </Tab.Navigator>

@@ -15,6 +15,8 @@ import LoginPasswordScreen from '../../screens/auth/login password screen/LoginP
 import AcctRecoveryEmailLoginScreen from '../../screens/auth/account recovery email login screen/AcctRecoveryEmailLoginScreen'
 import HomeTopNavigation from '../top navigation/HomeTopNavigation'
 import NotificationScreen from '../../screens/notification screen/NotificationScreen'
+import ExploreScreen from '../../screens/explore screen/ExploreScreen'
+import SearchScreen from '../../screens/search screen/SearchScreen'
 
 
 const Stack = createNativeStackNavigator()
@@ -46,7 +48,10 @@ const StackNavigtion = () => {
               <Stack.Screen name="upload avatar" component={UploadAvatarScreen} />
               <Stack.Screen name="login password" component={LoginPasswordScreen} />
               <Stack.Screen name="acct recovery email login" component={AcctRecoveryEmailLoginScreen} />
+              <Stack.Screen name="search" component={SearchScreen} />
               <Stack.Screen name="tab" component={TabNavigation} />
+              <Stack.Screen name="explore" component={ExploreScreen} />
+        
            {/*
               <Stack.Screen name="tap" component={HomeTopNavigation} />*/}
             
