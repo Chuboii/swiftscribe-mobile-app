@@ -3,14 +3,15 @@ import ForYouScreen from '../../screens/for you screen/ForYouScreen'
 
 const Example = () => {
    return (
-     <Tabs.Container renderHeader={MyHeader}>
+     <Tabs.Container renderHeader={250}>
        <Tabs.Tab name="A">
          <ForYouScreen />
        </Tabs.Tab>
        <Tabs.Tab name="B">
          <ForYouScreen />
        </Tabs.Tab>
-     </Tabs.Container>
+    </Tabs.Container>
+   )
 
 
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
