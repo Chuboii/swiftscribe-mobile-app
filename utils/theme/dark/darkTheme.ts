@@ -9,5 +9,6 @@ export const color = {
     border:"#F5FCFF",
     btnText: "white",
     gray: "#E3E3E3",
-    gray2: "gray"
+    gray2: "gray",
+    green: "green"
 }
