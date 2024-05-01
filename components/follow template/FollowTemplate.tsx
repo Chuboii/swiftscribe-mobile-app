@@ -1,22 +1,22 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
-import Button from '../button/Button'
+import Button from '../button template/Button'
 import { styles } from './FollowTemplate.style'
 
-const FollowTemplate = ({containerStyle = null, btnStyle = null, btnTextStyle = null,wrapStyle = null,nameStyle = null, bioStyle = null, wrapperStyle = null, profileImgStyle = null, profilePictureUrl = null, username = null, bio = null,}) => {
+const FollowTemplate = ({ containerStyle = null, btnStyle = null, btnTextStyle = null, wrapStyle = null, nameStyle = null, bioStyle = null, wrapperStyle = null, profileImgStyle = null, profilePictureUrl = null, username = null, bio = null, }) => {
   return (
     <View style={[styles.container, containerStyle]}>
-          <View style={[styles.wrapper, wrapperStyle]}>
-              <Image source={profilePictureUrl} style={[styles.profileImg, profileImgStyle]} />
-              
-              <View style={[styles.wrap, wrapStyle]}>
-                  <Text style={[styles.name, nameStyle]}>{username}</Text>
-                  <Text style={[styles.bio, bioStyle]} numberOfLines={2}>{bio}</Text>
-              </View>
-          </View>
+      <View style={[styles.wrapper, wrapperStyle]}>
+        <Image source={profilePictureUrl} style={[styles.profileImg, profileImgStyle]} />
 
-          <Button text={"following"} containerStyle={[styles.btn, btnStyle]} textStyle={[styles.btnText, btnTextStyle]}/>
-          
+        <View style={[styles.wrap, wrapStyle]}>
+          <Text style={[styles.name, nameStyle]}>{username}</Text>
+          <Text style={[styles.bio, bioStyle]} numberOfLines={2}>{bio}</Text>
+        </View>
+      </View>
+
+      <Button text={"following"} containerStyle={[styles.btn, btnStyle]} textStyle={[styles.btnText, btnTextStyle]} />
+
     </View>
   )
 }
