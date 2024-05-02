@@ -17,6 +17,7 @@ import HomeTopNavigation from '../top navigation/home top navigation/HomeTopNavi
 import NotificationScreen from '../../screens/notification screen/NotificationScreen'
 import ExploreScreen from '../../screens/explore screen/ExploreScreen'
 import SearchScreen from '../../screens/search screen/SearchScreen'
+import EditProfileScreen from '../../screens/edit profile screen/EditProfileScreen'
 
 
 const Stack = createNativeStackNavigator()
@@ -37,7 +38,7 @@ const StackNavigtion = () => {
                 initialRouteName='tab'
                 screenOptions={{
                     headerShown: false,
-                   // animation: ""
+                    // animation: ""
                 }}>
                 <Stack.Screen name="sign up" component={SignUpScreen} />
                 <Stack.Screen name="account recovery" component={AccountRecoveryScreen} />
@@ -51,6 +52,8 @@ const StackNavigtion = () => {
                 <Stack.Screen options={{ presentation: "modal" }} name="search" component={SearchScreen} />
                 <Stack.Screen name="tab" component={TabNavigation} />
                 <Stack.Screen name="explore" component={ExploreScreen} />
+
+                <Stack.Screen name="edit profile" component={EditProfileScreen} />
 
                 {/*
               <Stack.Screen name="tap" component={HomeTopNavigation} />*/}

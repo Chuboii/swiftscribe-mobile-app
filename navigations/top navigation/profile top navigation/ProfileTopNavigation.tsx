@@ -17,7 +17,7 @@ import { styles } from "./ProfileTopNavigation.style";
 import { AntDesign } from "@expo/vector-icons";
 import FollowScreen from "../../../screens/follow screen/FollowScreen";
 import theme from "../../../utils/theme/theme/theme";
-import { navigateToNotificationPage } from "../../../utils/navigations/navigations";
+import { navigateToEditProfilePage, navigateToNotificationPage } from "../../../utils/navigations/navigations";
 import ListScreen from "../../../screens/list screen/ListScreen";
 import ReadingHistory from "../../../screens/reading history/ReadingHistory";
 import SavedLists from "../../../screens/saved lists/SavedLists";
@@ -30,13 +30,14 @@ const screenHeight = Dimensions.get("window").height;
 const Tab = createMaterialTopTabNavigator();
 
 export default function ProfileTabNavigation({ navigation }) {
-    const navigateToNotification = () => {
-        navigateToNotificationPage(navigation);
+    const navigateToEditProfile = () => {
+        navigateToEditProfilePage(navigation);
     };
+
 
     return (
         <>
-            <ProfileHeaderTemplate />
+            <ProfileHeaderTemplate username="Joe Doe" handleFunction={navigateToEditProfile} />
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarShowIcon: true,
@@ -59,7 +60,7 @@ export default function ProfileTabNavigation({ navigation }) {
                     options={{ tabBarLabel: "Lists" }}
                 />
                 <Tab.Screen name="About" component={AboutScreen} />
-            </Tab.Navigator>
+            </Tab.Navigator >
         </>
     );
 }

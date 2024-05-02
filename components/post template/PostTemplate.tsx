@@ -11,7 +11,7 @@ import CommentTemplate from '../comment template/CommentTemplate';
 import { Ionicons } from '@expo/vector-icons';
 
 
-const PostTemplate = ({ handleFunction = () => null, isReadingHistoryPage = false, descStyle = null, desc = null, hide = true, dontHideAllBtn = true, style = null, nameStyle = null, boxStyle = null, containerStyle = null, wrapStyle = null, profileImgStyle = null, textStyle = null, wrapperStyle = null, titleStyle = null, postImgStyle = null, profilePictureUrl = null, expoIcon = null, username = null, title = null, postPictureUrl = null, date = null, readTime = null }) => {
+const PostTemplate = ({ handleFunction = () => null, isUserStories = false, isReadingHistoryPage = false, descStyle = null, desc = null, hide = true, dontHideAllBtn = true, style = null, nameStyle = null, boxStyle = null, containerStyle = null, wrapStyle = null, profileImgStyle = null, textStyle = null, wrapperStyle = null, titleStyle = null, postImgStyle = null, profilePictureUrl = null, expoIcon = null, username = null, title = null, postPictureUrl = null, date = null, readTime = null }) => {
     return (
         <TouchableOpacity style={[styles.container, containerStyle]}>
             <View style={[styles.wrap, wrapStyle]}>
@@ -52,18 +52,21 @@ const PostTemplate = ({ handleFunction = () => null, isReadingHistoryPage = fals
                                     <Button containerStyle={styles.btn} expoIcon={<Ionicons name="bookmarks" size={17} color="black" style={styles.icon} />} />
                                     <Button containerStyle={styles.btn} expoIcon={<FontAwesome6
                                         name="ellipsis-vertical" style={styles.icon} size={20}
-                                        color={theme().text} />} /></View> :
-                                <View style={[styles.wrap]}>
-                                    <Button containerStyle={styles.btn} expoIcon={<MaterialIcons
-                                        name="post-add" size={20} style={styles.icon}
-                                        color={theme().text} />} />
-                                    {hide && <Button containerStyle={styles.btn}
-                                        expoIcon={<AntDesign name="minuscircleo" style={styles.icon}
-                                            size={20} color={theme().text} />} />}
+                                        color={theme().text} />} /></View> : isUserStories ?
                                     <Button containerStyle={styles.btn} expoIcon={<FontAwesome6
                                         name="ellipsis-vertical" style={styles.icon} size={20}
-                                        color={theme().text} />} />
-                                </View>}
+                                        color={theme().text} />} /> :
+                                    <View style={[styles.wrap]}>
+                                        <Button containerStyle={styles.btn} expoIcon={<MaterialIcons
+                                            name="post-add" size={20} style={styles.icon}
+                                            color={theme().text} />} />
+                                        {hide && <Button containerStyle={styles.btn}
+                                            expoIcon={<AntDesign name="minuscircleo" style={styles.icon}
+                                                size={20} color={theme().text} />} />}
+                                        <Button containerStyle={styles.btn} expoIcon={<FontAwesome6
+                                            name="ellipsis-vertical" style={styles.icon} size={20}
+                                            color={theme().text} />} />
+                                    </View>}
 
                         </View>
                     }

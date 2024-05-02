@@ -25,6 +25,7 @@
     "react-native": "0.73.6",
     "react-native-collapsible-tab-view": "^7.0.1",
     "react-native-confirmation-code-field": "^7.4.0",
+    "react-native-dropdown-picker": "^5.4.6",
     "react-native-pager-view": "6.2.3",
     "react-native-paper": "^5.12.3",
     "react-native-pell-rich-editor": "^1.9.0",
