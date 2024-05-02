@@ -37,7 +37,7 @@ const StackNavigtion = () => {
                 initialRouteName='tab'
                 screenOptions={{
                     headerShown: false,
-                    animation: "none"
+                   // animation: ""
                 }}>
                 <Stack.Screen name="sign up" component={SignUpScreen} />
                 <Stack.Screen name="account recovery" component={AccountRecoveryScreen} />

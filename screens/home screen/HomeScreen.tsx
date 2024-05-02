@@ -6,16 +6,7 @@ import ForYouScreen from "../for you screen/ForYouScreen"
 const HomeScreen = () => {
   return (
       <>
-      <FlatList
-        data={[2,2,4]}
-        renderItem={({item}) => <ForYouScreen/> }
-        ListHeaderComponent={
-        <>
-                <Text>HomeScreen</Text>
-               <TapNavigation/>
-            </>
-        }
-      />
+
 
     </>
   )

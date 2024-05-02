@@ -5,8 +5,10 @@ import { styles } from './AboutScreen.style'
 
 const AboutScreen = () => {
   return (
-    <View>
-      <Prompt text="You haven't added any information yet" textStyle={styles.text} btnStyle={styles.btn} btnText={"add a bio"} btnTextStyle={styles.btnText} />
+    <View style={styles.container}>
+      <Prompt text="You haven't added any information yet"
+      containerStyle={styles.promptContainer} textStyle={styles.text} btnStyle={styles.btn}
+      btnText={"Add a bio"} btnTextStyle={styles.btnText} />
     </View>
   )
 }

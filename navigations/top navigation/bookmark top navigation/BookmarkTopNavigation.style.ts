@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,StatusBar } from "react-native";
 import theme from "../../../utils/theme/theme/theme";
 
 export const styles = StyleSheet.create({
@@ -8,11 +8,13 @@ export const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: StatusBar.currentHeight,
   },
   textStyle: {
     fontFamily: "kanit-bold",
     fontSize: 30,
     color: theme().text,
+    textTransform:"capitalize"
   },
   btnStyle: {
     backgroundColor: theme().green,

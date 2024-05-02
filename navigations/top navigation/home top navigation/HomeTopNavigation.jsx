@@ -27,6 +27,7 @@ export default function BookmarkTabNavigation({ navigation }) {
         text="Home"
         textStyle={styles.text}
         btnStyle={styles.btn}
+        handleFunction={navigateToNotification}
         button={
           <Ionicons
             size={24}
