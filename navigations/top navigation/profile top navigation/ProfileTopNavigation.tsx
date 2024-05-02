@@ -24,6 +24,8 @@ import SavedLists from "../../../screens/saved lists/SavedLists";
 import StoriesScreen from "../../../screens/stories screen/StoriesScreen";
 import AboutScreen from "../../../screens/about screen/AboutScreen";
 import ProfileHeaderTemplate from "../../../components/profile header template/ProfileHeaderTemplate";
+import WritePostIcon from "../../../components/write post icon/WritePostIcon"
+
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -37,6 +39,7 @@ export default function ProfileTabNavigation({ navigation }) {
 
     return (
         <>
+        <WritePostIcon/>
             <ProfileHeaderTemplate username="Joe Doe" handleFunction={navigateToEditProfile} />
             <Tab.Navigator
                 screenOptions={({ route }) => ({

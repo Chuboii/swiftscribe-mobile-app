@@ -11,6 +11,8 @@ import { AntDesign } from "@expo/vector-icons";
 import FollowScreen from "../../../screens/follow screen/FollowScreen";
 import theme from "../../../utils/theme/theme/theme";
 import { navigateToNotificationPage } from "../../../utils/navigations/navigations";
+import WritePostIcon from "../../../components/write post icon/WritePostIcon"
+
 const screenHeight = Dimensions.get("window").height;
 
 const Tab = createMaterialTopTabNavigator();
@@ -22,6 +24,7 @@ export default function BookmarkTabNavigation({ navigation }) {
 
   return (
     <>
+    <WritePostIcon navigation={navigation}/>
       <PageHeader
         containerStyle={styles.container}
         text="Home"

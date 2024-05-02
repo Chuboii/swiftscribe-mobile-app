@@ -14,7 +14,7 @@ const ProfileHeaderTemplate = ({ boxStyle = null, nameStyle = null, isEditProfil
                         :
                         <Text style={[styles.name, nameStyle]}>{username}</Text>
                     }
-                    {isEditProfile ? <Text>Recommended square, JPG, PNG or GIF, atleast 1000 pixels per side</Text> : <View style={[styles.wrap]}>
+                    {isEditProfile ? <Text style={styles.recommendText}>Recommended square, JPG, PNG or GIF, atleast 1000 pixels per side</Text> : <View style={[styles.wrap]}>
                         <Text style={[styles.text]}>0 followers</Text>
                         <Text style={[styles.text]}>14 following</Text>
                     </View>}

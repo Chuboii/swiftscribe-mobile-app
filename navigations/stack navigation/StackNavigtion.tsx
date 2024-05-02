@@ -18,7 +18,7 @@ import NotificationScreen from '../../screens/notification screen/NotificationSc
 import ExploreScreen from '../../screens/explore screen/ExploreScreen'
 import SearchScreen from '../../screens/search screen/SearchScreen'
 import EditProfileScreen from '../../screens/edit profile screen/EditProfileScreen'
-
+import WritePostScreen from "../../screens/write post screen/WritePostScreen"
 
 const Stack = createNativeStackNavigator()
 
@@ -55,8 +55,8 @@ const StackNavigtion = () => {
 
                 <Stack.Screen name="edit profile" component={EditProfileScreen} />
 
-                {/*
-              <Stack.Screen name="tap" component={HomeTopNavigation} />*/}
+              
+              <Stack.Screen name="write post screen" component={WritePostScreen} />
 
                 <Stack.Screen name="notification" component={NotificationScreen} />
             </Stack.Navigator>

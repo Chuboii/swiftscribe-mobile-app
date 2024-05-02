@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions} from "react-native";
 import theme from "../../utils/theme/theme/theme";
+
+const screenWidth = Dimensions.get("window").width
 
 export const styles = StyleSheet.create({
   container: {
@@ -33,6 +35,11 @@ export const styles = StyleSheet.create({
     paddingVertical: 16,
     marginTop: 20,
     elevation: 3,
+  },
+  recommendText:{
+    width: screenWidth - 150,
+    fontFamily:"kanit-regular",
+    marginTop:10
   },
   profileImg: {
     width: 80,

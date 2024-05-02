@@ -9,6 +9,8 @@ import PageHeader from '../../components/page header/PageHeader';
 import { AntDesign } from '@expo/vector-icons';
 import { navigateToSearchPage } from '../../utils/navigations/navigations';
 import FollowTemplate from '../../components/follow template/FollowTemplate';
+import WritePostIcon from "../../components/write post icon/WritePostIcon"
+
 
 const ExploreScreen = ({ navigation }) => {
     
@@ -17,6 +19,8 @@ const ExploreScreen = ({ navigation }) => {
     
 
   return (
+    <>
+    <WritePostIcon/>
     <SafeAreaView style={styles.container}>
       <PageHeader text='Explore' textStyle={styles.headerTitle}/>
       <TouchableOpacity onPress={navigateToSearch} style={styles.box}>
@@ -60,6 +64,7 @@ const ExploreScreen = ({ navigation }) => {
               </ScrollView>
           </ScrollView>
              </SafeAreaView>
+             </>
   )
 }
 
