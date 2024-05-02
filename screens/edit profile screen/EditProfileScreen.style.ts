@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
   },
   wrapperStyle: {
     alignItems: "flex-start",
+    backgroundColor: "red",
   },
   profileHeadBtnText: {
     textAlign: "left",
