@@ -27,6 +27,7 @@
     "react-native-cn-quill": "^0.7.18",
     "react-native-collapsible-tab-view": "^7.0.1",
     "react-native-confirmation-code-field": "^7.4.0",
+    "react-native-draftjs-render": "^2.9.0",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-pager-view": "6.2.3",
     "react-native-paper": "^5.12.3",
