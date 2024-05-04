@@ -67,7 +67,7 @@ const TextEditor = () => {
         <TouchableOpacity style={styles.block} onPress={createNewBlocks}>
           <Text>Add Block</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleImageUpload}>
+        <TouchableOpacity style={styles.block} onPress={handleImageUpload}>
           <Text>Add Image</Text>
         </TouchableOpacity>
       </ScrollView>
