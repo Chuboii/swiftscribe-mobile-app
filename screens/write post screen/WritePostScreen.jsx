@@ -1,268 +1,302 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  NativeSyntheticEvent,
-  TextInputKeyPressEventData,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import * as ImagePicker from "expo-image-picker";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { Button } from "react-native-paper";
-const options = [
-  {
-    id: 1,
-    name: "image",
-    icon: "image-outline",
-    fontAwesome: false,
-  },
-  {
-    id: 2,
-    name: "text",
-    icon: "text-outline",
-    fontAwesome: false,
-  },
-  {
-    id: 3,
-    name: "link",
-    icon: "link-outline",
-    fontAwesome: false,
-  },
-  {
-    id: 4,
-    name: "color",
-    icon: "color-palette-outline",
-    fontAwesome: false,
-  },
-  {
-    id: 5,
-    name: "bold",
-    icon: "bold",
-    fontAwesome: true,
-  },
-  {
-    id: 6,
-    name: "italic",
-    icon: "italic",
-    fontAwesome: true,
-  },
-];
+import React, { useRef, useEffect } from "react";
+import { View } from "react-native";
+import { WebView } from "react-native-webview";
 
-const TextEditor = () => {
-  const [block, setBlock] = useState([]);
-  const [option, setOption] = useState("text");
-  const [isImageBlockLoaded, setIsImageBlockLoaded] = useState(true);
-  const [text, setText] = useState({ title: "", content: "" }); // State to hold the current text
-  // const [selection, setSelection] = useState({ start: 0, end: 0 }); // State to hold the text selection range
+const App = () => {
+  const webviewRef = useRef(null);
 
-  const handleTextChange = (value) => {
-    setText(value);
-    console.log(value);
-  };
+  useEffect(() => {
+    const run = `
+      document.body.style.backgroundColor = 'blue';
+      true;
+    `;
 
-  const createNewBlocks = () => {
-    setBlock((prev) => {
-      if (option === "text") {
-        // setLoading(true)
-        return [
-          ...prev,
-          <TextInput
-            autoFocus={true}
-            value={text.content}
-            onChangeText={handleTextChange}
-            multiline={true}
-            style={styles.content}
-            onKeyPress={handleEndEditing}
-            numberOfLines={undefined}
-            placeholder="start writing"
-          />,
-        ];
-      } else if (option === "image" && isImageBlockLoaded) {
-        setIsImageBlockLoaded(false);
-        return [
-          ...prev,
-          <TouchableOpacity style={styles.block} onPress={handleImageUpload}>
-            <Text>Add Image</Text>
-          </TouchableOpacity>,
-        ];
-      } else {
-        return [...prev];
-      }
-    });
-  };
+    const timeout = setTimeout(() => {
+      webviewRef.current.injectJavaScript(run);
+    }, 3000);
 
-  const replaceBlock = () => {
-    setBlock((prev) => {
-      const newItems = [...prev];
-      newItems[prev.length - 1] = (
-        <Image
-          style={styles.image}
-          source={require("../../assets/images (14).jpeg")}
-        />
-      );
-      return newItems;
-    });
-  };
-
-  const handleImageUpload = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      alert("Sorry, we need camera roll permissions to make this work!");
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      const { uri } = result;
-      const imgTag = `<img src="${uri}" alt="Uploaded Image" style="max-width: 100%;" />`;
-      replaceBlock();
-    }
-  };
-
-  const chooseOption = (opt) => {
-    setOption(opt);
-    if (opt === "image") {
-      createNewBlocks();
-    } else if (opt === "text") {
-      createNewBlocks();
-    }
-  };
-
-  const handleEndEditing = (event) => {
-    if (event.nativeEvent.key === "Enter") {
-      createNewBlocks();
-    }
-  };
-
-  // // Function to apply formatting (e.g., bold)
-  // const applyFormatting = (format) => {
-  //   const newText = `${text.slice(0, selection.start)}${format}${text.slice(
-  //     selection.start,
-  //     selection.end
-  //   )}${format}${text.slice(selection.end)}`;
-  //   setText(newText);
-  // };
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <TextInput
-          placeholder="Add title"
-          value={text.title}
-          onChangeText={handleTextChange}
-          multiline={true}
-          onKeyPress={handleEndEditing}
-          numberOfLines={undefined}
-          autoFocus={true}
-          style={styles.title}
-        />
-
-        <TextInput>
-          <Text style={{ fontWeight: 900 }}>aa</Text>aa
-          <Text style={{ fontStyle: "italic" }}>aa</Text>
-        </TextInput>
-        <FlatList data={block} renderItem={({ item }) => item} />
-
-        {/*   <TouchableOpacity style={styles.block} onPress={createNewBlocks}>
-<AntDesign name="plus" size={24} color="black" />
-        </TouchableOpacity>*/}
-      </View>
-      <View style={styles.toolbar}>
-        <FlatList
-          horizontal
-          data={options}
-          keyExtractor={(data) => String(data.id)}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => chooseOption(item.name)}
-                style={styles.btn}
-              >
-                {item.fontAwesome ? (
-                  <FontAwesome size={20} name={item.icon} />
-                ) : (
-                  <Ionicons name={item.icon} size={24} color="black" />
-                )}
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <WebView
+        ref={webviewRef}
+        source={{
+          uri: "https://github.com/react-native-webview/react-native-webview",
+        }}
+      />
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    justifyContent: "space-between",
-  },
-  btn: {
-    borderRightColor: "gray",
-    borderRightWidth: 0.5,
-    padding: 20,
-  },
-  content: {
-    fontFamily: "kanit-regular",
-    paddingVertical: 10,
-    minHeight: 50,
-  },
-  image: {
-    width: 109,
-    height: 100,
-  },
-  title: {
-    fontSize: 35,
-  },
-  block: {
-    width: "70%",
-    height: 120,
-    alignSelf: "center",
-    marginVertical: 10,
-    borderColor: "black",
-    borderWidth: 1,
-    borderStyle: "dashed",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 20,
-  },
-  toolbar: {
-    backgroundColor: "#eee",
-    borderRadius: 10,
-    elevation: 5,
-  },
-  toolbarButton: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  editor: {
-    flex: 1,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "gray",
-    marginBottom: 10,
-    padding: 5,
-  },
-});
+export default App;
 
-export default TextEditor;
+// import React, { useState, useEffect } from "react";
+// import {
+//   View,
+//   TextInput,
+//   TouchableOpacity,
+//   Text,
+//   StyleSheet,
+//   ScrollView,
+//   FlatList,
+//   Image,
+//   KeyboardAvoidingView,
+//   Platform,
+//   NativeSyntheticEvent,
+//   TextInputKeyPressEventData,
+// } from "react-native";
+// import { SafeAreaView } from "react-native-safe-area-context";
+// import * as ImagePicker from "expo-image-picker";
+// import { AntDesign } from "@expo/vector-icons";
+// import { Ionicons, FontAwesome } from "@expo/vector-icons";
+// import { Button } from "react-native-paper";
+// const options = [
+//   {
+//     id: 1,
+//     name: "image",
+//     icon: "image-outline",
+//     fontAwesome: false,
+//   },
+//   {
+//     id: 2,
+//     name: "text",
+//     icon: "text-outline",
+//     fontAwesome: false,
+//   },
+//   {
+//     id: 3,
+//     name: "link",
+//     icon: "link-outline",
+//     fontAwesome: false,
+//   },
+//   {
+//     id: 4,
+//     name: "color",
+//     icon: "color-palette-outline",
+//     fontAwesome: false,
+//   },
+//   {
+//     id: 5,
+//     name: "bold",
+//     icon: "bold",
+//     fontAwesome: true,
+//   },
+//   {
+//     id: 6,
+//     name: "italic",
+//     icon: "italic",
+//     fontAwesome: true,
+//   },
+// ];
+
+// const TextEditor = () => {
+//   const [block, setBlock] = useState([]);
+//   const [option, setOption] = useState("text");
+//   const [isImageBlockLoaded, setIsImageBlockLoaded] = useState(true);
+//   const [text, setText] = useState({ title: "", content: "" }); // State to hold the current text
+//   // const [selection, setSelection] = useState({ start: 0, end: 0 }); // State to hold the text selection range
+
+//   const handleTextChange = (value) => {
+//     setText(value);
+//     console.log(value);
+//   };
+
+//   const createNewBlocks = () => {
+//     setBlock((prev) => {
+//       if (option === "text") {
+//         // setLoading(true)
+//         return [
+//           ...prev,
+//           <TextInput
+//             autoFocus={true}
+//             value={text.content}
+//             onChangeText={handleTextChange}
+//             multiline={true}
+//             style={styles.content}
+//             onKeyPress={handleEndEditing}
+//             numberOfLines={undefined}
+//             placeholder="start writing"
+//           />,
+//         ];
+//       } else if (option === "image" && isImageBlockLoaded) {
+//         setIsImageBlockLoaded(false);
+//         return [
+//           ...prev,
+//           <TouchableOpacity style={styles.block} onPress={handleImageUpload}>
+//             <Text>Add Image</Text>
+//           </TouchableOpacity>,
+//         ];
+//       } else {
+//         return [...prev];
+//       }
+//     });
+//   };
+
+//   const replaceBlock = () => {
+//     setBlock((prev) => {
+//       const newItems = [...prev];
+//       newItems[prev.length - 1] = (
+//         <Image
+//           style={styles.image}
+//           source={require("../../assets/images (14).jpeg")}
+//         />
+//       );
+//       return newItems;
+//     });
+//   };
+
+//   const handleImageUpload = async () => {
+//     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+//     if (status !== "granted") {
+//       alert("Sorry, we need camera roll permissions to make this work!");
+//       return;
+//     }
+
+//     const result = await ImagePicker.launchImageLibraryAsync({
+//       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+//       allowsEditing: true,
+//       quality: 1,
+//     });
+
+//     if (!result.cancelled) {
+//       const { uri } = result;
+//       const imgTag = `<img src="${uri}" alt="Uploaded Image" style="max-width: 100%;" />`;
+//       replaceBlock();
+//     }
+//   };
+
+//   const chooseOption = (opt) => {
+//     setOption(opt);
+//     if (opt === "image") {
+//       createNewBlocks();
+//     } else if (opt === "text") {
+//       createNewBlocks();
+//     }
+//   };
+
+//   const handleEndEditing = (event) => {
+//     if (event.nativeEvent.key === "Enter") {
+//       createNewBlocks();
+//     }
+//   };
+
+//   // // Function to apply formatting (e.g., bold)
+//   // const applyFormatting = (format) => {
+//   //   const newText = `${text.slice(0, selection.start)}${format}${text.slice(
+//   //     selection.start,
+//   //     selection.end
+//   //   )}${format}${text.slice(selection.end)}`;
+//   //   setText(newText);
+//   // };
+
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <View>
+//         <TextInput
+//           placeholder="Add title"
+//           value={text.title}
+//           onChangeText={handleTextChange}
+//           multiline={true}
+//           onKeyPress={handleEndEditing}
+//           numberOfLines={undefined}
+//           autoFocus={true}
+//           style={styles.title}
+//         />
+
+//         <TextInput>
+//           <Text style={{ fontWeight: 900 }}>aa</Text>aa
+//           <Text style={{ fontStyle: "italic" }}>aa</Text>
+//         </TextInput>
+//         <FlatList data={block} renderItem={({ item }) => item} />
+
+//         {/*   <TouchableOpacity style={styles.block} onPress={createNewBlocks}>
+// <AntDesign name="plus" size={24} color="black" />
+//         </TouchableOpacity>*/}
+//       </View>
+//       <View style={styles.toolbar}>
+//         <FlatList
+//           horizontal
+//           data={options}
+//           keyExtractor={(data) => String(data.id)}
+//           renderItem={({ item }) => {
+//             return (
+//               <TouchableOpacity
+//                 onPress={() => chooseOption(item.name)}
+//                 style={styles.btn}
+//               >
+//                 {item.fontAwesome ? (
+//                   <FontAwesome size={20} name={item.icon} />
+//                 ) : (
+//                   <Ionicons name={item.icon} size={24} color="black" />
+//                 )}
+//               </TouchableOpacity>
+//             );
+//           }}
+//         />
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 10,
+//     justifyContent: "space-between",
+//   },
+//   btn: {
+//     borderRightColor: "gray",
+//     borderRightWidth: 0.5,
+//     padding: 20,
+//   },
+//   content: {
+//     fontFamily: "kanit-regular",
+//     paddingVertical: 10,
+//     minHeight: 50,
+//   },
+//   image: {
+//     width: 109,
+//     height: 100,
+//   },
+//   title: {
+//     fontSize: 35,
+//   },
+//   block: {
+//     width: "70%",
+//     height: 120,
+//     alignSelf: "center",
+//     marginVertical: 10,
+//     borderColor: "black",
+//     borderWidth: 1,
+//     borderStyle: "dashed",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     borderRadius: 20,
+//   },
+//   toolbar: {
+//     backgroundColor: "#eee",
+//     borderRadius: 10,
+//     elevation: 5,
+//   },
+//   toolbarButton: {
+//     fontSize: 16,
+//     fontWeight: "bold",
+//     marginBottom: 10,
+//   },
+//   editor: {
+//     flex: 1,
+//   },
+//   input: {
+//     borderWidth: 1,
+//     borderColor: "gray",
+//     marginBottom: 10,
+//     padding: 5,
+//   },
+// });
+
+// export default TextEditor;
 
 // import React, { useEffect, useLayoutEffect } from "react";
 // import {

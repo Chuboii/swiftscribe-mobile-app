@@ -21,7 +21,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.keksbot.swiftscribe"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,7 +34,10 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/font/kanit", "./assets/font/climate crisis"]
+          "fonts": [
+            "./assets/font/kanit",
+            "./assets/font/climate crisis"
+          ]
         }
       ],
       [
