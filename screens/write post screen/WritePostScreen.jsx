@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -11,85 +11,107 @@ import {
   KeyboardAvoidingView,
   Platform,
   NativeSyntheticEvent,
-  TextInputKeyPressEventData
+  TextInputKeyPressEventData,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker";
-import { AntDesign } from '@expo/vector-icons';
-import { Ionicons, FontAwesome} from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Button } from "react-native-paper";
 const options = [
   {
     id: 1,
     name: "image",
-    icon:"image-outline",
-fontAwesome:false
+    icon: "image-outline",
+    fontAwesome: false,
   },
   {
     id: 2,
     name: "text",
-    icon:"text-outline",
-fontAwesome:false
+    icon: "text-outline",
+    fontAwesome: false,
   },
   {
     id: 3,
     name: "link",
-    icon:"link-outline",
-fontAwesome:false
-  },
-    {
-    id: 4,
-    name: "color",
-    icon:"color-palette-outline",
-    fontAwesome:false
+    icon: "link-outline",
+    fontAwesome: false,
   },
   {
-    id:5,
-    name:"bold",
-    icon: "bold",
-    fontAwesome:true
+    id: 4,
+    name: "color",
+    icon: "color-palette-outline",
+    fontAwesome: false,
   },
-    {
-    id:6,
-    name:"italic",
+  {
+    id: 5,
+    name: "bold",
+    icon: "bold",
+    fontAwesome: true,
+  },
+  {
+    id: 6,
+    name: "italic",
     icon: "italic",
-    fontAwesome:true
-  }
+    fontAwesome: true,
+  },
 ];
 
 const TextEditor = () => {
   const [block, setBlock] = useState([]);
   const [option, setOption] = useState("text");
-  const [isImageBlockLoaded, setIsImageBlockLoaded] = useState(true)
-  
+  const [isImageBlockLoaded, setIsImageBlockLoaded] = useState(true);
+  const [text, setText] = useState({ title: "", content: "" }); // State to hold the current text
+  // const [selection, setSelection] = useState({ start: 0, end: 0 }); // State to hold the text selection range
 
+  const handleTextChange = (value) => {
+    setText(value);
+    console.log(value);
+  };
 
   const createNewBlocks = () => {
     setBlock((prev) => {
       if (option === "text") {
-       // setLoading(true)
-        return [...prev, <TextInput autoFocus={true} multiline={true}
-        style={styles.content}
-        onKeyPress={handleEndEditing}
-        numberOfLines={undefined} placeholder="start writing" />];
+        // setLoading(true)
+        return [
+          ...prev,
+          <TextInput
+            autoFocus={true}
+            value={text.content}
+            onChangeText={handleTextChange}
+            multiline={true}
+            style={styles.content}
+            onKeyPress={handleEndEditing}
+            numberOfLines={undefined}
+            placeholder="start writing"
+          />,
+        ];
       } else if (option === "image" && isImageBlockLoaded) {
-        setIsImageBlockLoaded(false)
-        return [...prev,         <TouchableOpacity style={styles.block} onPress={handleImageUpload}>
-          <Text>Add Image</Text>
-        </TouchableOpacity>]
-      }
-      else{
-        return [...prev]
+        setIsImageBlockLoaded(false);
+        return [
+          ...prev,
+          <TouchableOpacity style={styles.block} onPress={handleImageUpload}>
+            <Text>Add Image</Text>
+          </TouchableOpacity>,
+        ];
+      } else {
+        return [...prev];
       }
     });
   };
-  
+
   const replaceBlock = () => {
-    setBlock(prev => {
-     const newItems = [...prev]
-      newItems[prev.length - 1] = <Image style={styles.image} source={require("../../assets/images (14).jpeg")}/>
-     return newItems
-    })
-  }
+    setBlock((prev) => {
+      const newItems = [...prev];
+      newItems[prev.length - 1] = (
+        <Image
+          style={styles.image}
+          source={require("../../assets/images (14).jpeg")}
+        />
+      );
+      return newItems;
+    });
+  };
 
   const handleImageUpload = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -107,51 +129,61 @@ const TextEditor = () => {
     if (!result.cancelled) {
       const { uri } = result;
       const imgTag = `<img src="${uri}" alt="Uploaded Image" style="max-width: 100%;" />`;
-      replaceBlock()
+      replaceBlock();
     }
   };
-  
-  
+
   const chooseOption = (opt) => {
-    setOption(opt)
-    if(opt === "image"){
-      createNewBlocks()
-    }
-    else if(opt === "text"){
-      createNewBlocks()
+    setOption(opt);
+    if (opt === "image") {
+      createNewBlocks();
+    } else if (opt === "text") {
+      createNewBlocks();
     }
   };
 
-
-const handleEndEditing = (event:
-NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-  if (event.nativeEvent.key === 'Enter') {
-      createNewBlocks()
+  const handleEndEditing = (event) => {
+    if (event.nativeEvent.key === "Enter") {
+      createNewBlocks();
     }
-}
+  };
 
-
+  // // Function to apply formatting (e.g., bold)
+  // const applyFormatting = (format) => {
+  //   const newText = `${text.slice(0, selection.start)}${format}${text.slice(
+  //     selection.start,
+  //     selection.end
+  //   )}${format}${text.slice(selection.end)}`;
+  //   setText(newText);
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+        <TextInput
+          placeholder="Add title"
+          value={text.title}
+          onChangeText={handleTextChange}
+          multiline={true}
+          onKeyPress={handleEndEditing}
+          numberOfLines={undefined}
+          autoFocus={true}
+          style={styles.title}
+        />
 
-    <View>
-     <TextInput placeholder="Add title"
-    multiline={true}
-    onKeyPress={handleEndEditing}
-    numberOfLines={undefined}
-    autoFocus={true} style={styles.title}/>
+        <TextInput>
+          <Text style={{ fontWeight: 900 }}>aa</Text>aa
+          <Text style={{ fontStyle: "italic" }}>aa</Text>
+        </TextInput>
+        <FlatList data={block} renderItem={({ item }) => item} />
 
-      <FlatList data={block} renderItem={({ item }) => item} />
-
-     {/*   <TouchableOpacity style={styles.block} onPress={createNewBlocks}>
+        {/*   <TouchableOpacity style={styles.block} onPress={createNewBlocks}>
 <AntDesign name="plus" size={24} color="black" />
         </TouchableOpacity>*/}
-
-</View>
+      </View>
       <View style={styles.toolbar}>
         <FlatList
-        horizontal
+          horizontal
           data={options}
           keyExtractor={(data) => String(data.id)}
           renderItem={({ item }) => {
@@ -160,13 +192,15 @@ NativeSyntheticEvent<TextInputKeyPressEventData>) => {
                 onPress={() => chooseOption(item.name)}
                 style={styles.btn}
               >
-              {item.fontAwesome ? <FontAwesome size={20} name={item.icon} /> :
-<Ionicons name={item.icon} size={24} color="black" />}
+                {item.fontAwesome ? (
+                  <FontAwesome size={20} name={item.icon} />
+                ) : (
+                  <Ionicons name={item.icon} size={24} color="black" />
+                )}
               </TouchableOpacity>
             );
           }}
         />
-
       </View>
     </SafeAreaView>
   );
@@ -176,45 +210,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    justifyContent:"space-between"
+    justifyContent: "space-between",
   },
   btn: {
-    borderRightColor:"gray",
-    borderRightWidth:.5,
+    borderRightColor: "gray",
+    borderRightWidth: 0.5,
     padding: 20,
-    
   },
-  content:{
-    fontFamily:"kanit-regular",
-    paddingVertical:10,
-    backgroundColor:"red",
-    minHeight:500, 
-    
+  content: {
+    fontFamily: "kanit-regular",
+    paddingVertical: 10,
+    minHeight: 50,
   },
-  image:{
-    width:109,
-    height:100
+  image: {
+    width: 109,
+    height: 100,
   },
-  title:{
-    fontSize:35,
-    fontFamily:"kanit-bold"
+  title: {
+    fontSize: 35,
   },
   block: {
     width: "70%",
     height: 120,
-    alignSelf:"center",
-    marginVertical:10,
+    alignSelf: "center",
+    marginVertical: 10,
     borderColor: "black",
     borderWidth: 1,
-    borderStyle:"dashed",
-    justifyContent:"center",
-    alignItems:"center",
-    borderRadius:20
+    borderStyle: "dashed",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
   },
-  toolbar:{
-    backgroundColor:"#eee",
-    borderRadius:10,
-    elevation:5
+  toolbar: {
+    backgroundColor: "#eee",
+    borderRadius: 10,
+    elevation: 5,
   },
   toolbarButton: {
     fontSize: 16,
