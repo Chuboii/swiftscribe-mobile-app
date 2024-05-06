@@ -1,31 +1,33 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { WebView } from "react-native-webview";
 
 const App = () => {
-  const webviewRef = useRef(null);
+  const [html, setHtml] = useState("");
 
   useEffect(() => {
-    const run = `
-      document.body.style.backgroundColor = 'blue';
-      true;
+    const htmlContent = `
+      <html>
+        <head></head>
+        <body>
+          <script>
+            setTimeout(function () {
+              window.ReactNativeWebView.postMessage("Hello!")
+            }, 2000)
+          </script>
+        </body>
+      </html>
     `;
-
-    const timeout = setTimeout(() => {
-      webviewRef.current.injectJavaScript(run);
-    }, 3000);
-
-    return () => clearTimeout(timeout);
+    setHtml(htmlContent);
   }, []);
+
+  const handleMessage = (event) => {
+    alert(event.nativeEvent.data);
+  };
 
   return (
     <View style={{ flex: 1 }}>
-      <WebView
-        ref={webviewRef}
-        source={{
-          uri: "https://github.com/react-native-webview/react-native-webview",
-        }}
-      />
+      <WebView source={{ html }} onMessage={handleMessage} />
     </View>
   );
 };
