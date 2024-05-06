@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   SafeAreaView,
   View,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-} from 'react-native';
-import { RichText, Toolbar, useEditorBridge } from '@10play/tentap-editor';
+} from "react-native";
+import { RichText, Toolbar, useEditorBridge } from "@10play/tentap-editor";
 
 export const Basic = () => {
   const editor = useEditorBridge({
@@ -19,7 +19,7 @@ export const Basic = () => {
     <SafeAreaView style={exampleStyles.fullScreen}>
       <RichText editor={editor} />
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={exampleStyles.keyboardAvoidingView}
       >
         <Toolbar editor={editor} />
@@ -33,13 +33,13 @@ const exampleStyles = StyleSheet.create({
     flex: 1,
   },
   keyboardAvoidingView: {
-    position: 'absolute',
-    width: '100%',
+    position: "absolute",
+    width: "100%",
     bottom: 0,
   },
 });
 
-const initialContent = `<p>This is a basic example!</p>`;?
+const initialContent = `<p>This is a basic example!</p>`;
 
 // import React, { useState, useEffect } from "react";
 // import {
