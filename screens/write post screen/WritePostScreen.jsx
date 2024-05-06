@@ -1,38 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { View } from "react-native";
-import { WebView } from "react-native-webview";
+import React from "react";
+import {
+  Text,
+  Platform,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
+import {
+  actions,
+  RichEditor,
+  RichToolbar,
+} from "react-native-pell-rich-editor";
 
-const App = () => {
-  const [html, setHtml] = useState("");
+const handleHead = ({ tintColor }) => (
+  <Text style={{ color: tintColor }}>H1</Text>
+);
+const TempScreen = () => {
+  const richText = React.useRef();
 
-  useEffect(() => {
-    const htmlContent = `
-      <html>
-        <head></head>
-        <body>
-          <script>
-            setTimeout(function () {
-              window.ReactNativeWebView.postMessage("Hello!")
-            }, 2000)
-          </script>
-        </body>
-      </html>
-    `;
-    setHtml(htmlContent);
-  }, []);
-
-  const handleMessage = (event) => {
-    alert(event.nativeEvent.data);
-  };
-
+  richText.current.insertImage(
+    "https://plus.unsplash.com/premium_photo-1675884829570-83a41714113b?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  );
+  console.log(richText.current);
   return (
-    <View style={{ flex: 1 }}>
-      <WebView source={{ html }} onMessage={handleMessage} />
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
+        >
+          <Text>Description:</Text>
+          <RichEditor
+            ref={richText}
+            onChange={(descriptionText) => {
+              console.log("descriptionText:", descriptionText);
+            }}
+          />
+        </KeyboardAvoidingView>
+      </ScrollView>
+
+      <RichToolbar
+        editor={richText}
+        actions={[
+          actions.setBold,
+          actions.setItalic,
+          actions.setUnderline,
+          actions.heading1,
+          actions.insertBulletsList,
+          actions.insertOrderedList,
+          actions.insertImage,
+        ]}
+        iconMap={{ [actions.heading1]: handleHead }}
+      />
+    </SafeAreaView>
   );
 };
 
-export default App;
+export default TempScreen;
 
 // import React, { useState, useEffect } from "react";
 // import {

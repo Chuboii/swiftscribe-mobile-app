@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@10play/tentap-editor": "^0.4.57",
     "@expensify/react-native-live-markdown": "^0.1.69",
     "@expo/html-elements": "^0.9.1",
     "@react-navigation/bottom-tabs": "^6.5.20",
@@ -33,7 +34,7 @@
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
     "react-native-vector-icons": "^10.0.3",
-    "react-native-webview": "13.6.4",
+    "react-native-webview": "^13.6.4",
     "react-redux": "^9.1.1",
     "typescript": "^5.4.5"
   },
