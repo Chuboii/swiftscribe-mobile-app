@@ -1,62 +1,45 @@
-import React from "react";
+mport React from 'react';
 import {
-  Text,
-  Platform,
-  KeyboardAvoidingView,
   SafeAreaView,
-  ScrollView,
-} from "react-native";
-import {
-  actions,
-  RichEditor,
-  RichToolbar,
-} from "react-native-pell-rich-editor";
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+} from 'react-native';
+import { RichText, Toolbar, useEditorBridge } from '@10play/tentap-editor';
 
-const handleHead = ({ tintColor }) => (
-  <Text style={{ color: tintColor }}>H1</Text>
-);
-const TempScreen = () => {
-  const richText = React.useRef();
+export const Basic = () => {
+  const editor = useEditorBridge({
+    autofocus: true,
+    avoidIosKeyboard: true,
+    initialContent,
+  });
 
-  // richText.current.insertImage(
-  //   "https://plus.unsplash.com/premium_photo-1675884829570-83a41714113b?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  // );
-  // console.log(richText.current);
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ flex: 1 }}
-        >
-          <Text>Description:</Text>
-          <RichEditor
-            ref={richText}
-            onChange={(descriptionText) => {
-              console.log("descriptionText:", descriptionText);
-            }}
-          />
-        </KeyboardAvoidingView>
-      </ScrollView>
-
-      <RichToolbar
-        editor={richText}
-        actions={[
-          actions.setBold,
-          actions.setItalic,
-          actions.setUnderline,
-          actions.heading1,
-          actions.insertBulletsList,
-          actions.insertOrderedList,
-          actions.insertImage,
-        ]}
-        iconMap={{ [actions.heading1]: handleHead }}
-      />
+    <SafeAreaView style={exampleStyles.fullScreen}>
+      <RichText editor={editor} />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={exampleStyles.keyboardAvoidingView}
+      >
+        <Toolbar editor={editor} />
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
 
-export default TempScreen;
+const exampleStyles = StyleSheet.create({
+  fullScreen: {
+    flex: 1,
+  },
+  keyboardAvoidingView: {
+    position: 'absolute',
+    width: '100%',
+    bottom: 0,
+  },
+});
+
+const initialContent = `<p>This is a basic example!</p>`;?
 
 // import React, { useState, useEffect } from "react";
 // import {
