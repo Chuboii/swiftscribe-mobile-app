@@ -1,45 +1,69 @@
-import React from "react";
-import {
-  SafeAreaView,
-  View,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-} from "react-native";
-import { RichText, Toolbar, useEditorBridge } from "@10play/tentap-editor";
+import React, {useState} from "react";
+import { Text, Platform, KeyboardAvoidingView, SafeAreaView, ScrollView } from "react-native";
+import {actions, RichEditor, RichToolbar} from "react-native-pell-rich-editor";
+import * as ImagePicker from 'expo-image-picker';
 
-export const Basic = () => {
-  const editor = useEditorBridge({
-    autofocus: true,
-    avoidIosKeyboard: true,
-    initialContent,
+
+const handleHead = ({tintColor}) => <Text style={{color: tintColor}}>H1</Text>
+const TempScreen = () => {
+	const richText = React.useRef();
+	const [image, setImage] = useState(null)
+	
+	
+	const pickImage = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
   });
+  
+  //this.onPressAddImage(image)
 
-  return (
-    <SafeAreaView style={exampleStyles.fullScreen}>
-      <RichText editor={editor} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={exampleStyles.keyboardAvoidingView}
-      >
-        <Toolbar editor={editor} />
-      </KeyboardAvoidingView>
+  if (!result.cancelled) {
+    setImage(result.uri);
+  }
+};
+
+richText.current.onPressAddImage(pickImage)
+
+	return (
+    <SafeAreaView>
+      <ScrollView>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}	style={{ flex: 1 }}>
+          <Text>Description:</Text>
+          <RichEditor
+              ref={richText}
+              onChange={ descriptionText => {
+                  console.log("descriptionText:", descriptionText);
+              }}
+          />
+        </KeyboardAvoidingView>
+      </ScrollView>
+
+      <RichToolbar
+        editor={richText}
+        actions={[ actions.insertImage,
+actions.setBold,
+actions.setItalic,
+actions.insertBulletsList,
+actions.insertOrderedList,
+actions.insertLink,
+actions.keyboard,
+actions.setStrikethrough,
+actions.setUnderline,
+actions.removeFormat,
+actions.insertVideo,
+actions.checkboxList,
+actions.undo,
+actions.redo ]}
+        iconMap={{ [actions.heading1]: handleHead }}
+      />
     </SafeAreaView>
   );
 };
 
-const exampleStyles = StyleSheet.create({
-  fullScreen: {
-    flex: 1,
-  },
-  keyboardAvoidingView: {
-    position: "absolute",
-    width: "100%",
-    bottom: 0,
-  },
-});
-
-const initialContent = `<p>This is a basic example!</p>`;
+export default TempScreen;
 
 // import React, { useState, useEffect } from "react";
 // import {
