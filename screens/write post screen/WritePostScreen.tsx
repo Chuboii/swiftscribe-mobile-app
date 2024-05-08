@@ -31,6 +31,7 @@ import { cld } from "../../lib/cloudinary/cloudinary";
 import { Cloudinary } from "@cloudinary/url-gen";
 import SpinnerOverlay from "../../components/spinner template/SpinnerOverlay";
 import Spinner from "react-native-loading-spinner-overlay";
+import DrawerBottom from "../../components/drawer bottom template/DrawerBottom";
 
 const handleHead = ({ tintColor }) => (
   <Text style={{ color: tintColor }}>H1</Text>
@@ -205,43 +206,49 @@ const WritePostScreen = ({ navigation }) => {
 
   const navigate = () => navigateBack(navigation)
 
+  const previewPost = () => null
+
+
   return (
-    <SafeAreaView style={styles.container}>
-      {isImageLoaded ? <SpinnerOverlay /> :
-        ""}
-      <InsertLinkModal
-        placeholderColor={theme().gray}
-        color={theme().text}
-        backgroundColor={theme().background}
-        onDone={onLinkDone}
-        forwardRef={linkModal}
-      />
-      <View style={styles.wrapper}>
-        <Button helperFunction={navigate} expoIcon={<AntDesign name="arrowleft" size={24} color="black" />} />
-        <Button text={"Preview"} containerStyle={styles.btn} textStyle={styles.btnText} />
-      </View>
+    <>
+      <DrawerBottom navigation={navigation} />
+      <SafeAreaView style={styles.container}>
+
+        {isImageLoaded ? <SpinnerOverlay /> :
+          ""}
+        <InsertLinkModal
+          placeholderColor={theme().gray}
+          color={theme().text}
+          backgroundColor={theme().background}
+          onDone={onLinkDone}
+          forwardRef={linkModal}
+        />
+        <View style={styles.wrapper}>
+          <Button helperFunction={navigate} expoIcon={<AntDesign name="arrowleft" size={24} color="black" />} />
+          <Button helperFunction={previewPost} text={"Preview"} containerStyle={styles.btn} textStyle={styles.btnText} />
+        </View>
 
 
 
-      <KeyboardAwareScrollView>
-        <ScrollView>
-          <TextInput
-            style={styles.input}
-            autoFocus={true}
-            multiline
-            numberOfLines={undefined}
-            autoCapitalize="sentences"
-            placeholder="Your Title"
-          />
-          <RichEditor
-            enterKeyHint={'done'}
-            onHeightChange={handleHeightChange}
-            placeholder={'Start writing'}
-            style={styles.rich}
-            initialFocus={false}
-            firstFocusEnd={false}
-            editorStyle={{
-              contentCSSText: `
+        <KeyboardAwareScrollView>
+          <ScrollView>
+            <TextInput
+              style={styles.input}
+              autoFocus={true}
+              multiline
+              numberOfLines={undefined}
+              autoCapitalize="sentences"
+              placeholder="Your Title"
+            />
+            <RichEditor
+              enterKeyHint={'done'}
+              onHeightChange={handleHeightChange}
+              placeholder={'Start writing'}
+              style={styles.rich}
+              initialFocus={false}
+              firstFocusEnd={false}
+              editorStyle={{
+                contentCSSText: `
             font-family: kanit; 
             font-size: 17px; 
             line-height: 36px; 
@@ -251,62 +258,63 @@ const WritePostScreen = ({ navigation }) => {
             min-height:400; 
             position: absolute; 
             top: 0; right: 0; bottom: 0; left: 0;`,
-            }}
-            ref={richText}
-            onChange={(descriptionText) => {
-              console.log("descriptionText:", descriptionText);
-            }}
-            // editorInitializedCallback={editorInitializedCallback}
-            pasteAsPlainText={true}
+              }}
+              ref={richText}
+              onChange={(descriptionText) => {
+                console.log("descriptionText:", descriptionText);
+              }}
+              // editorInitializedCallback={editorInitializedCallback}
+              pasteAsPlainText={true}
+            />
+          </ScrollView>
+        </KeyboardAwareScrollView>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <RichToolbar
+            selectedIconTint={'#2095F2'}
+            disabledIconTint={'#bfbfbf'}
+            editor={richText}
+            style={[styles.richBar]}
+            onPressAddImage={onPressAddImage}
+            onInsertLink={onInsertLink}
+            insertEmoji={handleEmoji}
+            insertVideo={handleInsertVideo}
+            fontSize={handleFontSize}
+            foreColor={handleForeColor}
+            hiliteColor={handleHaliteColor}
+            actions={[
+              actions.insertImage,
+              actions.setBold,
+              actions.setItalic,
+              actions.insertBulletsList,
+              actions.insertOrderedList,
+              actions.insertLink,
+              actions.keyboard,
+              actions.setStrikethrough,
+              actions.setUnderline,
+              actions.removeFormat,
+              actions.insertVideo,
+              actions.checkboxList,
+              actions.undo,
+              actions.redo,
+              actions.blockquote,
+              actions.alignLeft,
+              actions.alignCenter,
+              actions.alignRight,
+              actions.code,
+              actions.line,
+              actions.heading1,
+              'fontSize'
+            ]}
+            iconMap={{ insertEmoji: phizIcon, [actions.heading1]: handleHead }}
+
           />
-        </ScrollView>
-      </KeyboardAwareScrollView>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <RichToolbar
-          selectedIconTint={'#2095F2'}
-          disabledIconTint={'#bfbfbf'}
-          editor={richText}
-          style={[styles.richBar]}
-          onPressAddImage={onPressAddImage}
-          onInsertLink={onInsertLink}
-          insertEmoji={handleEmoji}
-          insertVideo={handleInsertVideo}
-          fontSize={handleFontSize}
-          foreColor={handleForeColor}
-          hiliteColor={handleHaliteColor}
-          actions={[
-            actions.insertImage,
-            actions.setBold,
-            actions.setItalic,
-            actions.insertBulletsList,
-            actions.insertOrderedList,
-            actions.insertLink,
-            actions.keyboard,
-            actions.setStrikethrough,
-            actions.setUnderline,
-            actions.removeFormat,
-            actions.insertVideo,
-            actions.checkboxList,
-            actions.undo,
-            actions.redo,
-            actions.blockquote,
-            actions.alignLeft,
-            actions.alignCenter,
-            actions.alignRight,
-            actions.code,
-            actions.line,
-            actions.heading1,
-            'fontSize'
-          ]}
-          iconMap={{ insertEmoji: phizIcon, [actions.heading1]: handleHead }}
+          {emojiVisible && <EmojiView onSelect={handleInsertEmoji} />}
+        </KeyboardAvoidingView>
 
-        />
-        {emojiVisible && <EmojiView onSelect={handleInsertEmoji} />}
-      </KeyboardAvoidingView>
-
-    </SafeAreaView >
+      </SafeAreaView >
+    </>
   );
 };
 

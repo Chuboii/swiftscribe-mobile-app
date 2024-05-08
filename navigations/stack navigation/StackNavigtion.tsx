@@ -54,7 +54,7 @@ const StackNavigtion = () => {
                 <Stack.Screen name="tab" component={TabNavigation} />
                 <Stack.Screen name="explore" component={ExploreScreen} />
                 <Stack.Screen name="edit profile" component={EditProfileScreen} />
-                <Stack.Screen name="drawer bottom" component={DrawerBottom} />
+
                 <Stack.Screen name="write post screen" component={WritePostScreen} />
                 <Stack.Screen name="notification" component={NotificationScreen} />
             </Stack.Navigator>

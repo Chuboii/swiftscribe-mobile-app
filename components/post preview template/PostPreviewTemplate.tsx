@@ -7,16 +7,18 @@ const PostPreviewTemplate = () => {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
-                <Image source={require("../../assets/images (14).jpeg")} style={styles.img} />
-                <Text>Joe Doe</Text>
+                <View style={styles.wrap}>
+                    <Image source={require("../../assets/images (14).jpeg")} style={styles.img} />
+                    <Text style={styles.name}>Joe Doe</Text>
+                </View>
+
+                <View style={styles.wrapper}>
+                    <TextInput placeholder='Post Title' style={styles.title} />
+                    <TextInput placeholder='Post Subtille' style={styles.subtitle} />
+                </View>
             </View>
 
-            <View style={styles.wrap}>
-                <TextInput style={styles.title} />
-                <TextInput style={styles.subtitle} />
-            </View>
-
-            <Button textStyle={styles.text} text={"Edit"} />
+            <Button containerStyle={styles.btn} textStyle={styles.text} text={"Edit"} />
         </View>
     )
 }
