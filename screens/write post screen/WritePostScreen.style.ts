@@ -3,9 +3,12 @@ import { Dimensions, StatusBar, StyleSheet } from "react-native";
 const screenHeight = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
   btn: {
-    padding: 10,
+    padding: 13,
     paddingHorizontal: 30,
     backgroundColor: "green",
     borderRadius: 7,
@@ -16,6 +19,25 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     paddingVertical: 10,
+  },
+  rich: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: "#e3e3e3",
+  },
+  richBar: {
+    borderColor: "#efefef",
+  },
+  spinnerTextStyle: {
+    fontFamily: "kanit-medium",
+  },
+  content: {
+    minHeight: 300,
+  },
+  input: {
+    fontFamily: "kanit-bold",
+    fontSize: 35,
+    borderWidth: 0,
+    padding: 10,
   },
   root: {
     flex: 1,
