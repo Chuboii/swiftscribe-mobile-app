@@ -1,11 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { Tuple, configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "../root reducer/rootReducer";
+import { logger } from "redux-logger";
 // ...
 
 export const store = configureStore({
-  reducer: {
-    toggleReducer: rootReducer,
-  },
+  reducer: rootReducer,
+  middleware: () => new Tuple(logger),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -1,6 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { toggleReducerSlice } from "../reducers/toggleReducer";
+import toggleReducer from "../reducers/toggleReducer";
+import tagReducer from "../reducers/tagReducer";
 
 export const rootReducer = combineReducers({
-  toggle: toggleReducerSlice,
+  toggle: toggleReducer,
+  tag: tagReducer,
 });

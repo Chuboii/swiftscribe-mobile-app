@@ -32,6 +32,9 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import SpinnerOverlay from "../../components/spinner template/SpinnerOverlay";
 import Spinner from "react-native-loading-spinner-overlay";
 import DrawerBottom from "../../components/drawer bottom template/DrawerBottom";
+import { useAppDispatch } from "../../hooks/use dispatch/useDispatch";
+import { useAppSelector } from "../../hooks/use selector/useSelector";
+import { togglePreviewPostComp } from "../../lib/redux/reducers/toggleReducer";
 
 const handleHead = ({ tintColor }) => (
   <Text style={{ color: tintColor }}>H1</Text>
@@ -45,6 +48,8 @@ const WritePostScreen = ({ navigation }) => {
   const [disabled, setDisable] = useState(false)
   const [isImageLoaded, setImageLoaded] = useState(false)
   const phizIcon = require('../../assets/images/phiz.png')
+  const dispatch = useAppDispatch()
+  const isPreviewPostToggled = useAppSelector(state => state.toggle.togglePreviewPostComp)
 
 
   const onPressAddImage = useCallback(async () => {
@@ -206,14 +211,13 @@ const WritePostScreen = ({ navigation }) => {
 
   const navigate = () => navigateBack(navigation)
 
-  const previewPost = () => null
+  const previewPost = () => dispatch(togglePreviewPostComp(true))
 
 
   return (
     <>
-      <DrawerBottom navigation={navigation} />
       <SafeAreaView style={styles.container}>
-
+        {isPreviewPostToggled && <DrawerBottom navigation={navigation} />}
         {isImageLoaded ? <SpinnerOverlay /> :
           ""}
         <InsertLinkModal

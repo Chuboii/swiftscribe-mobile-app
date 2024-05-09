@@ -2,38 +2,44 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 
-// Define a type for the slice state
-interface CounterState {
-  value: number;
+interface ToggleState {
+  togglePreviewPostComp: boolean;
+  togglePreviewCompCategory: boolean;
+  togglePreviewCompAddCategory: boolean;
+  togglePreviewCompTag: boolean;
 }
 
-// Define the initial state using that type
-const initialState: CounterState = {
-  value: 0,
+const initialState: ToggleState = {
+  togglePreviewPostComp: false,
+  togglePreviewCompCategory: false,
+  togglePreviewCompTag: false,
+  togglePreviewCompAddCategory: false,
 };
 
 export const toggleReducerSlice = createSlice({
-  name: "counter",
-  // `createSlice` will infer the state type from the `initialState` argument
+  name: "toggle",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    togglePreviewPostComp(state, action: PayloadAction<boolean>) {
+      state.togglePreviewPostComp = action.payload;
     },
-    decrement: (state) => {
-      state.value -= 1;
+    togglePreviewCompCategory(state, action: PayloadAction<boolean>) {
+      state.togglePreviewCompCategory = action.payload;
     },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    togglePreviewCompAddCategory(state, action: PayloadAction<boolean>) {
+      state.togglePreviewCompAddCategory = action.payload;
+    },
+    togglePreviewCompTag(state, action: PayloadAction<boolean>) {
+      state.togglePreviewCompTag = action.payload;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } =
-  toggleReducerSlice.actions;
+export const {
+  togglePreviewPostComp,
+  togglePreviewCompAddCategory,
+  togglePreviewCompTag,
+  togglePreviewCompCategory,
+} = toggleReducerSlice.actions;
 
-// // Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value;
-
-// export default counterSlice.reducer;
+export default toggleReducerSlice.reducer;
