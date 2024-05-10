@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, TouchableOpacity, TextInput, BackHandler } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, ScrollView, TouchableOpacity, TextInput, BackHandler, FlatList, TouchableWithoutFeedback } from 'react-native'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import PostPreviewTemplate from '../post preview template/PostPreviewTemplate'
 import { styles } from './DrawerBottom.style'
@@ -12,17 +12,25 @@ import DarkBg from '../dark bg/DarkBg'
 import Input from '../input template/Input'
 import { storeTagArr } from '../../lib/redux/reducers/tagReducer'
 import { preview } from '@cloudinary/url-gen/actions/videoEdit'
+import { storeCategoryArr } from '../../lib/redux/reducers/categoryReducer'
+import uuid from 'react-native-uuid'
 
 const DrawerBottom = ({ navigation }) => {
     const isTags = useAppSelector(state => state.toggle.togglePreviewCompTag)
     const isCategories = useAppSelector(state => state.toggle.togglePreviewCompCategory)
     const isAddCategory = useAppSelector(state => state.toggle.togglePreviewCompAddCategory)
+    const categoryArr = useAppSelector(state => state.category.storeCategoryArr)
     const dispatch = useAppDispatch()
     const tagArr = useAppSelector(state => state.tag.storeTagArr)
     const [inputValue, setInputValue] = useState({
         tagInput: "",
         addCategoryInput: ""
     })
+    const [isCategorySelected, setIsCategorySelected] = useState(false)
+    const [isAddToCategoryBtnClicked, setIsAddToCategoryBtnClicked] = useState(false)
+
+
+
 
     useEffect(() => {
 
@@ -85,7 +93,9 @@ const DrawerBottom = ({ navigation }) => {
 
         if (value.charAt(value.length - 1) === ',') {
             // Clear the tagInput value
-            dispatch(storeTagArr([value]))
+            const valueWithoutComma = value.substr(0, value.length - 1)
+
+            dispatch(storeTagArr([valueWithoutComma]))
 
             setInputValue((prev) => ({
                 ...prev,
@@ -101,22 +111,48 @@ const DrawerBottom = ({ navigation }) => {
             ...prev,
             addCategoryInput: value
         }))
+
+    }
+
+    const selectAndUnSelectCategoriesFromOptions = (isSelected: boolean, id: number) => {
+        const selectOrUnselectOption = categoryArr.
+            filter(c => {
+                if (c.id === id) {
+                    return ({ isCategorySelected: !isSelected })
+                }
+                else {
+                    return c
+                }
+            })
     }
 
 
-    // const generateTags = (event: any) => {
+    const addToCategoryStoreArr = () => {
 
-    //     if (event.nativeEvent.key === ",") {
-    //         // dispatch(storeTagArr([inputValue.tagInput]))
+        if (!inputValue.addCategoryInput) return null
 
-    //         // setInputValue(prev => ({
-    //         //     ...prev,
-    //         //     tagInput: ""
-    //         // }))
-    //     }
-    // }
 
-    // console.log(inputValue.tagInput);
+        const checkForDuplicateCategory = categoryArr.
+            filter(c => c.name === inputValue.addCategoryInput)
+
+        if (checkForDuplicateCategory.length > 0) return null
+
+        dispatch(storeCategoryArr([{ id: uuid.v4(), name: inputValue.addCategoryInput, clearCategory: false, isCategorySelected: true }]))
+        dispatch(togglePreviewCompAddCategory(false))
+        setInputValue((prev) => ({
+            ...prev,
+            addCategoryInput: ''
+        }));
+    }
+
+
+
+    const deleteCategoryFromAddToCategory = (id: number | number[] | string) => {
+        dispatch(storeCategoryArr([{ id: uuid.v4(), name: "clear category", clearCategory: true, isCategorySelected: false }]))
+        const deleteCategory = categoryArr.filter(c => c.id !== id)
+        console.log(deleteCategory)
+        dispatch(storeCategoryArr(deleteCategory))
+    }
 
 
     return (
@@ -140,13 +176,35 @@ const DrawerBottom = ({ navigation }) => {
                     </View>
                 </> : isCategories ?
                     <>
-                        <View style={styles.tagHead}>
-                            <Button helperFunction={navigateToPublish} expoIcon={<AntDesign style={styles.tagIcon} name="arrowleft" size={24} color="white" />} />
-                            <Text style={styles.tagTxt}>{isAddCategory ? "Add New Category" : "Categories"}</Text>
+                        <View style={styles.wrapper}>
+                            <View style={styles.tagHead}>
+                                <Button helperFunction={navigateToPublish} expoIcon={<AntDesign style={styles.tagIcon} name="arrowleft" size={24} color="white" />} />
+                                <Text style={styles.tagTxt}>{isAddCategory ? "Add New Category" : "Categories"}</Text>
+
+                                {isAddCategory ? "" :
+                                    <Button helperFunction={enableisAddCategoryInput} expoIcon={<AntDesign style={styles.tagIcon} name="plus" size={24} color="white" />} />
+                                }
+                            </View>
 
                             {isAddCategory ? "" :
-                                <Button helperFunction={enableisAddCategoryInput} expoIcon={<AntDesign style={styles.tagIcon} name="plus" size={24} color="white" />} />
-                            }
+                                <View style={styles.wrapBottom}>
+                                    {
+                                        <FlatList
+                                            keyExtractor={(item) => String(item.id)}
+                                            data={categoryArr}
+                                            renderItem={({ item }) => <TouchableOpacity onPress={() => selectAndUnSelectCategoriesFromOptions(item.isCategorySelected, item.id)} style={item.isCategorySelected ? styles.categorySelected : styles.category}>
+                                                <Text style={item.isCategorySelected ? styles.categorySelectedTxt : styles.categoryText}>{item.name}</Text>
+                                                <TouchableWithoutFeedback onPress={() => deleteCategoryFromAddToCategory(item.id)}>
+                                                    <AntDesign name="delete" size={24} color="red" />
+                                                </TouchableWithoutFeedback>
+
+                                            </TouchableOpacity>}
+                                        />
+                                    }
+
+
+
+                                </View>}
                         </View>
 
                         {isAddCategory ?
@@ -155,13 +213,18 @@ const DrawerBottom = ({ navigation }) => {
                                     <Input value={inputValue.addCategoryInput} onChangeText={generateTextFromAddCategoryInput} style={styles.catInput} />
                                     <Text style={styles.catInputTxt}>Category Name</Text>
                                 </View>
-                                <Button text={"Add to categories"} containerStyle={styles.catBtn} textStyle={styles.catBtnTxt} />
+                                <View style={styles.wrap}>
+                                    <AntDesign style={styles.icon} name="infocirlceo" size={24} color="gray"
+                                    />
+                                    <Text style={styles.text}>You can only add up to 3 categories</Text>
+                                </View>
+                                <Button helperFunction={addToCategoryStoreArr} text={"Add to categories"} containerStyle={styles.catBtn} textStyle={styles.catBtnTxt} />
                             </> : ""
                         }
                     </> :
                     <>
                         <PostPreviewTemplate />
-                        <View style={styles.wrap}>
+                        <View style={styles.wrapper}>
                             <TouchableOpacity style={styles.btn}>
                                 <Text style={styles.title}>Publish</Text>
                                 <Text style={styles.text}>Immediately</Text>
@@ -169,7 +232,14 @@ const DrawerBottom = ({ navigation }) => {
 
                             <TouchableOpacity style={styles.btn} onPress={navigateToTags}>
                                 <Text style={styles.title}>Tags</Text>
-                                <Text style={styles.text}>Not set</Text>
+                                {tagArr.length > 0 ?
+                                    <FlatList
+                                        data={tagArr}
+                                        horizontal
+                                        renderItem={({ item, index }) => <Text key={index} style={styles.text}>{item}</Text>}
+                                    />
+                                    : <Text style={styles.text}>Not set</Text>}
+
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.btn} onPress={navigateToCategories}>
@@ -181,7 +251,7 @@ const DrawerBottom = ({ navigation }) => {
                         <Button text={"Publish now"} containerStyle={styles.btnPub} textStyle={styles.btnTxt} />
                     </>
                 }
-            </View>
+            </View >
         </>
     )
 }

@@ -25,8 +25,48 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "kanit-medium",
   },
+  wrapBottom: {
+    paddingBottom: 170,
+  },
+  icon: {
+    marginRight: 10,
+    fontSize: 19,
+  },
+  category: {
+    borderColor: "white",
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: 15,
+    borderRadius: 5,
+    marginVertical: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  categoryText: {
+    color: "white",
+    fontFamily: "kanit-regular",
+  },
+  categorySelected: {
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: 15,
+    borderRadius: 5,
+    marginVertical: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  categorySelectedTxt: {
+    color: "black",
+    fontFamily: "kanit-regular",
+  },
   wrapper: {},
-  wrap: {},
+  wrap: {
+    marginVertical: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
   title: {
     color: "white",
     fontFamily: "kanit-regular",
@@ -35,6 +75,7 @@ export const styles = StyleSheet.create({
   text: {
     color: "gray",
     fontFamily: "kanit-regular",
+    marginRight: 5,
   },
   btn: {
     borderBottomColor: "gray",

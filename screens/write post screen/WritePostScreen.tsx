@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   Text,
   Platform,
@@ -35,6 +35,7 @@ import DrawerBottom from "../../components/drawer bottom template/DrawerBottom";
 import { useAppDispatch } from "../../hooks/use dispatch/useDispatch";
 import { useAppSelector } from "../../hooks/use selector/useSelector";
 import { togglePreviewPostComp } from "../../lib/redux/reducers/toggleReducer";
+import { storeTagArr } from "../../lib/redux/reducers/tagReducer";
 
 const handleHead = ({ tintColor }) => (
   <Text style={{ color: tintColor }}>H1</Text>
@@ -51,6 +52,10 @@ const WritePostScreen = ({ navigation }) => {
   const dispatch = useAppDispatch()
   const isPreviewPostToggled = useAppSelector(state => state.toggle.togglePreviewPostComp)
 
+
+  useEffect(() => {
+    dispatch(storeTagArr(["clear tags"]))
+  }, [])
 
   const onPressAddImage = useCallback(async () => {
     try {
