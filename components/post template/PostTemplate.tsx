@@ -13,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const PostTemplate = ({ handleFunction = () => null, isUserStories = false, isReadingHistoryPage = false, descStyle = null, desc = null, hide = true, dontHideAllBtn = true, style = null, nameStyle = null, boxStyle = null, containerStyle = null, wrapStyle = null, profileImgStyle = null, textStyle = null, wrapperStyle = null, titleStyle = null, postImgStyle = null, profilePictureUrl = null, expoIcon = null, username = null, title = null, postPictureUrl = null, date = null, readTime = null }) => {
     return (
-        <TouchableOpacity style={[styles.container, containerStyle]}>
+        <TouchableOpacity style={[styles.container, containerStyle]} onPress={handleFunction}>
             <View style={[styles.wrap, wrapStyle]}>
                 <Image source={profilePictureUrl} style={[styles.profileImg, profileImgStyle]} />
                 <Text style={[styles.name, nameStyle]}>{username}</Text>

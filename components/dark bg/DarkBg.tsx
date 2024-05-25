@@ -14,7 +14,7 @@ export default DarkBg
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "black",
-        opacity: .7,
+        opacity: .9,
         flex: 1,
         position: "absolute",
         top: 0,

@@ -3,7 +3,7 @@ import theme from "../../utils/theme/theme/theme";
 
 export const styles = StyleSheet.create({
   container: {
-    height: "70%",
+    height: "73%",
     position: "absolute",
     bottom: 0,
     width: "100%",

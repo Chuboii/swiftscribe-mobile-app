@@ -114,16 +114,19 @@ const DrawerBottom = ({ navigation }) => {
 
     }
 
-    const selectAndUnSelectCategoriesFromOptions = (isSelected: boolean, id: number) => {
+    const selectAndUnSelectCategoriesFromOptions = (isSelected: boolean, id: number | number[] | string) => {
+        dispatch(storeCategoryArr([{ id: uuid.v4(), name: "clear category", clearCategory: true, isCategorySelected: false }]))
+
         const selectOrUnselectOption = categoryArr.
-            filter(c => {
+            map(c => {
                 if (c.id === id) {
-                    return ({ isCategorySelected: !isSelected })
+                    return { ...c, isCategorySelected: !isSelected }
                 }
                 else {
                     return c
                 }
             })
+        dispatch(storeCategoryArr(selectOrUnselectOption))
     }
 
 
@@ -172,7 +175,6 @@ const DrawerBottom = ({ navigation }) => {
 
                     <View style={styles.tagWrap}>
                         {tagArr.length > 0 ? tagArr.map((tag, idx) => <Text key={idx} style={styles.tag}>{tag}</Text>) : ""}
-
                     </View>
                 </> : isCategories ?
                     <>

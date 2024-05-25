@@ -20,6 +20,7 @@ import SearchScreen from '../../screens/search screen/SearchScreen'
 import EditProfileScreen from '../../screens/edit profile screen/EditProfileScreen'
 import WritePostScreen from "../../screens/write post screen/WritePostScreen"
 import DrawerBottom from '../../components/drawer bottom template/DrawerBottom'
+import PostScreen from '../../screens/post screen/PostScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -54,7 +55,7 @@ const StackNavigtion = () => {
                 <Stack.Screen name="tab" component={TabNavigation} />
                 <Stack.Screen name="explore" component={ExploreScreen} />
                 <Stack.Screen name="edit profile" component={EditProfileScreen} />
-
+                <Stack.Screen name="post" component={PostScreen} />
                 <Stack.Screen name="write post screen" component={WritePostScreen} />
                 <Stack.Screen name="notification" component={NotificationScreen} />
             </Stack.Navigator>

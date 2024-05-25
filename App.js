@@ -9,6 +9,9 @@ import Theme from "./utils/theme/theme/theme";
 import theme from "./utils/theme/theme/theme";
 import { Provider } from "react-redux";
 import { store } from "./lib/redux/store/store";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -24,6 +27,8 @@ export default function App() {
 
   if (!fontsLoaded && !fontError) {
     return null;
+  } else {
+    SplashScreen.hideAsync();
   }
 
   return (
