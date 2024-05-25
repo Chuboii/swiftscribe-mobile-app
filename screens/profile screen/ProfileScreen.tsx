@@ -1,10 +1,11 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import ProfileTemplate from '../../components/profile template/ProfileTemplate'
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View>
-      <Text>ProfileScreen</Text>
+      <ProfileTemplate navigation={navigation} />
     </View>
   )
 }

@@ -1,12 +1,13 @@
-import { View, Platform } from "react-native";
+import { View, Platform, Text } from "react-native";
 import { useAppSelector } from "../../hooks/use selector/useSelector";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
-import React from "react";
+import React, { useState } from "react";
 import { styles } from "./PostScreen.style";
 import theme from "../../utils/theme/theme/theme";
+import CommentTemplate from "../../components/comment template/CommentTemplate";
 
-const RenderPost = () => {
+const RenderPost = ({ activateCommentDisplay }) => {
     const getPostData = useAppSelector((state) => state.postData.storePostData);
 
     const html = `
@@ -77,7 +78,7 @@ const RenderPost = () => {
                 color: gray;
                 margin-top: 5;
                 margin-bottom: 20;
-                font-weight: 100;
+                font-weight: 10;
             }
             .image {
                 width: 150px;
@@ -89,6 +90,7 @@ const RenderPost = () => {
             .text {
                 margin-right: 0px;
                 font-size: 35px;
+                font-weight: 100;
             }
             .btn-text {
                 font-size: 43px;
@@ -116,7 +118,7 @@ const RenderPost = () => {
                 border-radius: 30px;
             }
             .bottomBox {
-                background: rgba(255, 255, 255, 0.7);
+                background: rgba(255, 255, 255, 0.8);
                 border-radius: 16px;
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
                 backdrop-filter: blur(10px);
@@ -157,12 +159,12 @@ const RenderPost = () => {
             <img src=${getPostData.previewImage} alt="an image" class="image" />
             <div class="wrapBox">
                 <div class="wrap">
-                    <h4 class="name"> Joe Doe </h4>
+                    <h4 class="name">Joe Doe </h4>
                     <button class="btn-text"> Follow </button>
                 </div>
                 <div class="wrap box">
-                    <p class="text"> 7 mins read </p>
-                    <p class="text"> 6 hours ago </p>
+                    <p class="text">7 mins read </p>
+                    <p class="text">6 hours ago </p>
                 </div>
             </div>
         </div>
@@ -174,7 +176,7 @@ const RenderPost = () => {
                     <i class="fa fa-heart-o icon a" aria-hidden="true"></i>
                     <span class="text"> 56 </span>
                 </div>
-                <div class="wrap">
+                <div class="wrap" id="comment">
                     <i class="fa fa-comment-o icon a" aria-hidden="true"></i>
                     <span class="text"> 56 </span>
                 </div>
@@ -209,27 +211,61 @@ const RenderPost = () => {
         lastScrollTop = st <= 0 ? 0 : st;
     }, false);
 
+    const getCommentBtn = document.querySelector("#comment");
+
+
+    let isCommentActive = false
+
+    getCommentBtn.addEventListener("click", () => {
+     isCommentActive = true;
+     window.ReactNativeWebView.postMessage(isCommentActive);
+    })
+
 
     true; // Note: this is required, or you'll sometimes get silent failures
 })();
 `;
 
+    const handleMessage = (event) => {
+        const value = event.nativeEvent.data;
+        console.log("message" + value);
+
+        activateCommentDisplay(value)
+    };
+
+
+    // console.log(isCommentClicked);
+
+
     return (
-        <WebView
-            source={{ html }}
-            scalesPageToFit={(Platform.OS === 'ios') ? false : true}
-            style={{ flex: 1 }}
-            originWhitelist={["*"]}
-            injectedJavaScript={injectedJavaScript}
-        />
+        <>
+            <WebView
+                source={{ html }}
+                scalesPageToFit={(Platform.OS === 'ios') ? false : true}
+                style={{ flex: 1 }}
+                originWhitelist={["*"]}
+                injectedJavaScript={injectedJavaScript}
+                onMessage={handleMessage}
+            />
+        </>
     );
 };
 
 const PostScreen = () => {
+    const [isCommentClicked, setIsCommentClicked] = useState<boolean>(false)
+
+
+
     return (
         <>
-            <SafeAreaView></SafeAreaView>
-            <RenderPost />
+            <SafeAreaView>
+
+            </SafeAreaView>
+
+            {isCommentClicked ? <CommentTemplate isCommentActive={isCommentClicked} closeComment={setIsCommentClicked} /> : ""}
+
+
+            <RenderPost activateCommentDisplay={setIsCommentClicked} />
         </>
     );
 };

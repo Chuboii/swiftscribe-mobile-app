@@ -10,6 +10,7 @@ import theme from "./utils/theme/theme/theme";
 import { Provider } from "react-redux";
 import { store } from "./lib/redux/store/store";
 import * as SplashScreen from "expo-splash-screen";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 

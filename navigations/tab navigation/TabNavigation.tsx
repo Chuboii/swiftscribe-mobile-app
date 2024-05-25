@@ -11,7 +11,7 @@ import ExploreScreen from '../../screens/explore screen/ExploreScreen';
 import BookmarkTabNavigation from '../top navigation/bookmark top navigation/BookmarkTopNavigation';
 import StoriesScreen from '../../screens/stories screen/StoriesScreen';
 import ProfileTabNavigation from '../top navigation/profile top navigation/ProfileTopNavigation';
-
+import React from 'react';
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {

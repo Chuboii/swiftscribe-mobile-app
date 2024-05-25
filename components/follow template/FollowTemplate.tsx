@@ -1,12 +1,12 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Button from '../button template/Button'
 import { styles } from './FollowTemplate.style'
 
-const FollowTemplate = ({ containerStyle = null, btnStyle = null, btnTextStyle = null, wrapStyle = null, nameStyle = null, bioStyle = null, wrapperStyle = null, profileImgStyle = null, profilePictureUrl = null, username = null, bio = null, }) => {
+const FollowTemplate = ({ onClick = () => null, containerStyle = null, btnStyle = null, btnTextStyle = null, wrapStyle = null, nameStyle = null, bioStyle = null, wrapperStyle = null, profileImgStyle = null, profilePictureUrl = null, username = null, bio = null, }) => {
   return (
-    <View style={[styles.container, containerStyle]}>
-      <View style={[styles.wrapper, wrapperStyle]}>
+    <TouchableOpacity onPress={onClick} style={[styles.container, containerStyle]}>
+      <View style={[styles.wrapper, wrapperStyle]} >
         <Image source={profilePictureUrl} style={[styles.profileImg, profileImgStyle]} />
 
         <View style={[styles.wrap, wrapStyle]}>
@@ -17,7 +17,7 @@ const FollowTemplate = ({ containerStyle = null, btnStyle = null, btnTextStyle =
 
       <Button text={"following"} containerStyle={[styles.btn, btnStyle]} textStyle={[styles.btnText, btnTextStyle]} />
 
-    </View>
+    </TouchableOpacity>
   )
 }
 

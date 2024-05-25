@@ -39,8 +39,8 @@ const PostTemplate = ({ handleFunction = () => null, isUserStories = false, isRe
 
                 <View style={styles.wrapper1}>
                     {isReadingHistoryPage ? <View style={styles.wrap}>
-                        <LikeTemplate style={styles.icon1} noOfLikes={300} />
-                        <CommentTemplate style={styles.icon1} noOfComment={200} />
+                        <LikeTemplate style={styles.icon1} icon={'hearto'} num={300} />
+                        <LikeTemplate style={styles.icon1} icon={"message1"} num={100} />
                     </View> : ""
                     }
                     {
